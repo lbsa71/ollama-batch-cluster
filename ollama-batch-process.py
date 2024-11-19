@@ -38,7 +38,7 @@ def save_response(prompt, response_text, output_dir):
 
     #log_message(f"Response saved to {file_path}")
 
-async def chat(message, host, gpu_index, model, output_dir):
+async def chat(system_msg, message, host, gpu_index, model, output_dir):
     try:
         # Start timing
         start_time = datetime.now()
@@ -46,7 +46,7 @@ async def chat(message, host, gpu_index, model, output_dir):
         # Make the API request using the specified host and model
         response = await AsyncClient(host=f"http://{host}").chat(
             model=model,
-            messages=[message]
+            messages=[system_msg, message]
         )
 
         # Stop timing
@@ -75,15 +75,16 @@ async def chat(message, host, gpu_index, model, output_dir):
 async def worker(host, gpu_index, model, task_queue, output_dir):
     """Worker function to process tasks using the specified host."""
     while not task_queue.empty():
-        message = await task_queue.get()
-        await chat(message, host, gpu_index, model, output_dir)
+        system_msg, message = await task_queue.get()
+        await chat(system_msg, message, host, gpu_index, model, output_dir)
         task_queue.task_done()
 
 async def main(config_path, prompts_path, output_dir):
-    # Load GPU configuration and model from TOML file
+    # Get configuration  
     config = toml.load(config_path)
     model = config.get("model", "llama3.2")
-    gpus = config["gpus"]
+    gpus = config["ollama_instances"]
+    system_msg = json.loads(f'{{"role": "system", "content": "{config.get("system_message")}"}}')
 
     # Load prompts from JSONL file
     prompts = []
@@ -94,7 +95,7 @@ async def main(config_path, prompts_path, output_dir):
     # Create an async queue and populate it with prompts
     task_queue = asyncio.Queue()
     for message in prompts:
-        task_queue.put_nowait(message)
+        task_queue.put_nowait([system_msg, message])
 
     # Create a list of worker tasks, one for each GPU
     tasks = []
