@@ -16,6 +16,8 @@ The first thing we'll need to do is start up the Ollama servers, one per GPU. If
 bash ollama-batch-servers.sh 4
 ```
 
+ ![starting ollama servers](images/start-ollama-servers.png)
+
 ***Insert image here***
 
 ## Preparing your prompts
