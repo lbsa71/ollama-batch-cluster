@@ -25,7 +25,7 @@ chmod +x ollama-batch-servers
 
 ## Preparing your prompts
 
-You'll need to create a *JSONL* formatted file, with a single prompt per line. Example:
+Next You'll need to create a *JSONL* formatted file, with a single prompt per line. The following is an example:
 
 ```JSON
 {"role": "user", "content": "Analyze the reasons behind the collapse of the Western Roman Empire."}
@@ -42,7 +42,7 @@ You'll need to create a *JSONL* formatted file, with a single prompt per line. E
 
 ## Configuring the batch client
 
-The configuration file is a TOML formatted file that includes the LLM model to use, the list of Ollama instances to run the prompts against, and the system message to provide the LLM that will determine how it responds to the prompts. Here is an example configuration file:
+The configuration file is a TOML formatted file that includes the LLM model to use, the list of Ollama instances to run the prompts against, and the system message to provide the LLM that will determine how it responds to the prompts. Here is an example configuration file for a setup with 4 servers, each with 2 GPUs:
 
 ```TOML
 model = "llama3.2"
@@ -60,9 +60,19 @@ system_message = """You are an alien that can only respond with strings of emoji
 "server4:11433" = 1
 ```
 
-# Running a batch job
+If you are just running this on your laptop with the single standard Ollama process running on the default port, your configuraiton file should look like this
 
-Now that we have our servers running, prompts prepared and a configuration, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided *ollama-batch-process.py*. But first we'll need to install the required dependencies
+```TOML
+model = "llama3.2"
+system_message = """You are an alien that can only respond with strings of emoji characters to convey your answer."""
+
+[ollama_instances]
+"127.0.0.1:11434" = 0
+```
+
+## Running a batch job
+
+Now that we have our servers running, prompts prepared and a configuration, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided *ollama-batch-process.py*. But first we'll need to install the required dependencies, the *ollama* and *toml* modules:
 
 ```bash
 pip install ollama toml
@@ -88,6 +98,8 @@ Example running the client:
 ```
 python ollama-batch-process.py --config config.toml --prompts prompts.jsonl --output_dir batch10
 ```
+
+
 
 
 # retriving the responses
