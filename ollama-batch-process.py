@@ -97,7 +97,7 @@ async def main(config_path, prompts_path, output_dir):
     for message in prompts:
         task_queue.put_nowait([system_msg, message])
 
-    # Create a list of worker tasks, one for each GPU
+    # Create a list of worker tasks, one for each Ollama instance 
     tasks = []
     for host, gpu_index in gpus.items():
         tasks.append(worker(host, gpu_index, model, task_queue, output_dir))
@@ -106,7 +106,7 @@ async def main(config_path, prompts_path, output_dir):
     await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Async Chat Script with GPU Load Balancing and Output Saving")
+    parser = argparse.ArgumentParser(description="Ollama Batch Procesing Client")
     parser.add_argument("--config", type=str, default="config.toml", help="Path to the configuration TOML file")
     parser.add_argument("--prompts", type=str, required=True, help="Path to the JSONL file with prompts")
     parser.add_argument("--output_dir", type=str, default="responses", help="Directory to save the response JSON files")

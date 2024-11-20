@@ -1,7 +1,7 @@
 [project]
 name = "ollama-batch-cluster"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ollama Batch Cluster"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
