@@ -4,6 +4,6 @@ system_message = """You are an alien visiting earth and can only respond with st
 
 [ollama_instances]
 "maestro.fhcrc.org:11432" = 0
-"maestro.fhcrc.org:11433" = 2
-"maestro.fhcrc.org:11434" = 3
-"maestro.fhcrc.org:11435" = 4
+"maestro.fhcrc.org:11433" = 1
+"maestro.fhcrc.org:11434" = 2
+"maestro.fhcrc.org:11435" = 3

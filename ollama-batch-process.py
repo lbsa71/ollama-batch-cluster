@@ -106,7 +106,7 @@ async def main(config_path, prompts_path, output_dir):
     await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Ollama Batch Procesing Client")
+    parser = argparse.ArgumentParser(description="Ollama Batch Processing Client")
     parser.add_argument("--config", type=str, default="config.toml", help="Path to the configuration TOML file")
     parser.add_argument("--prompts", type=str, required=True, help="Path to the JSONL file with prompts")
     parser.add_argument("--output_dir", type=str, default="responses", help="Directory to save the response JSON files")
