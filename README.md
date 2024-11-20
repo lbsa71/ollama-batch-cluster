@@ -99,7 +99,7 @@ Example running the client:
 python ollama-batch-process.py --config config.toml --prompts prompts.jsonl --output_dir batch10
 ```
 
-
+![ollama batch process example](images/ollama-batch-process-example.png)
 
 
 # retriving the responses
