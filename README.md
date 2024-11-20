@@ -10,15 +10,18 @@ These instructions assume that you are already know how to install/use Ollama an
 
 ## Starting the Ollama servers
 
-The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided *ollama-batch-servers.sh* shell script. It only takes a single argument which is an integer indicating the number of GPUs in the system. Example on a server with 4 GPUs:
+The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided *ollama-batch-servers.sh* shell script. It only takes a single argument which is an integer indicating the number of GPUs in the system.
+
+**Usage:**
 
 ```bash
-bash ollama-batch-servers.sh 4
+chmod +x ollama-batch-servers
+./ollama-batch-servers.sh <number of gpus>
 ```
 
- ![starting ollama servers](images/start-ollama-servers.png)
+**Example on a system with 4 GPUs**:
 
-***Insert image here***
+ ![starting ollama servers](images/start-ollama-servers.png)
 
 ## Preparing your prompts
 
