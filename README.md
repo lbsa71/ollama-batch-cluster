@@ -1,16 +1,16 @@
 # Ollama Batch Cluster
 
-The code in this repository will allow you batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. 
+The code in this repository will allow you to batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. 
 
-This project started after I tried to get Ollama to make full use of a system with four Nvidia L40S GPUs but failed. I adjusted the *OLLAMA_NUM_PARALLEL* and *OLLAMA_SCHED_SPREAD* environment variables, and while it was now using all four GPUs, it was only pushing each GPU to about 25% utilization, so it didn't run any faster than if I had only had one GPU. I then ran four independent Ollama servers, each one pinned to different GPU using the *CUDA_VISIBLE_DEVICES* variable, a created script to load balance prompt across the Ollama servers. After a bunch of testing and refinement I ended up with the system I've shared in this repo. For a larger test, I spun up Ollama servers on six more servers, each with 4 L40S GPUs for a total of 28 GPUs and 1.344TB of VRAM. It seems to work perfectly. I know that vLLM is probably a better option for performance than Ollama, but I really like Ollama and it make it very simple. I used this setup to keep all 28 GPUs over 90% utilized for over 24 hours to stress test new GPUs before they went into production (one GPU kept failing with double bit errors and needed to replaced).
+This project started after I tried to get Ollama to make full use of a system with four Nvidia L40S GPUs but failed. I adjusted the *OLLAMA_NUM_PARALLEL* and *OLLAMA_SCHED_SPREAD* environment variables, and while it was now using all four GPUs, it was only pushing each GPU to about 25% utilization, so it didn't run any faster than if I had only had one GPU. I then ran four independent Ollama servers, each one pinned to different GPU using the *CUDA_VISIBLE_DEVICES* variable, and created a script to load balance prompts across the Ollama servers and GPUs. After a bunch of testing and refinement I ended up with the system I've shared in this repo. For a larger test, I spun up Ollama servers on six more servers, each with 4 L40S GPUs for a total of 28 GPUs and 1.344TB of VRAM. It worked perfectly. I know that vLLM is probably a better option for performance than Ollama, but I really like Ollama and it makes this very simple. I'll be spending more time with vLLM soon. I as able to use this setup to keep all 28 GPUs over 90% utilized for over 24 hours to stress test new GPUs before they went into production (one GPU kept failing with double bit errors and needed to be replaced).
 
-The following sections will so you how to use the code in this repo to set this up and use it to run batch jobs against a number of GPUs/servers.
+The following sections will show you how to use the code in this repo to set this up and use it to run batch jobs against any number of GPUs/servers.
 
-These instructions assume that you are already know how to install/use Ollama and are familiar with editing files, and running scripts. If you are new to Ollama and what to learn how to use it, see [my article](https://medium.com/p/913e50d6b7f0/) that covers the basics. 
+These instructions assume that you are already know how to install/use Ollama, are familiar with editing files, and running scripts. If you are new to Ollama and what to learn how to use it, see [my article](https://medium.com/p/913e50d6b7f0/) which covers the basics. 
 
 ## Starting the Ollama servers
 
-The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided [*ollama-batch-servers.sh*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/ollama-batch-servers.sh) shell script. It only takes a single argument which is an integer indicating the number of GPUs in the system.
+The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided [*ollama-batch-servers.sh*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/ollama-batch-servers.sh) shell script. It takes a single integer argument which indicates the number of GPUs in the system you want to use.
 
 **Usage:**
 
@@ -21,11 +21,11 @@ chmod +x ollama-batch-servers
 
 **Example on a system with 4 GPUs**:
 
- ![starting ollama servers](images/start-ollama-servers.png)
+![starting ollama servers](images/start-ollama-servers.png)
 
 ## Preparing your prompts
 
-Next You'll need to create a *JSONL* formatted file, with a single prompt per line. The following is an example:
+Next, you'll need to create a *JSONL* formatted file, with a single prompt per line. The following is an example:
 
 ```JSON
 {"role": "user", "content": "Analyze the reasons behind the collapse of the Western Roman Empire."}
@@ -60,7 +60,7 @@ system_message = """You are an alien that can only respond with strings of emoji
 "server4:11433" = 1
 ```
 
-If you are just running this on your laptop with the single standard Ollama process running on the default port, your configuraiton file should look like this
+If you are running this on your laptop with the single standard Ollama process running on the default port, your configuration file should look like this:
 
 ```TOML
 model = "llama3.2"
@@ -72,7 +72,7 @@ system_message = """You are an alien that can only respond with strings of emoji
 
 ## Running a batch job
 
-Now that we have our servers running, prompts prepared and a configuration, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided [*ollama-batch-process.py*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/response-printer.py). But first we'll need to install the required dependencies, the *ollama* and *toml* modules:
+Now that we have our servers running, prompts prepared and a configuration file, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided [*ollama-batch-process.py*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/response-printer.py). But first we'll need to install the required dependencies, the *ollama* and *toml* modules:
 
 ```bash
 pip install ollama toml
@@ -80,7 +80,7 @@ pip install ollama toml
 
 The following is the usage documentation for the client:
 
-```
+```bash
 usage: ollama-batch-process.py [-h] [--config CONFIG] --prompts PROMPTS [--output_dir OUTPUT_DIR]
 
 Ollama Batch Processing Client
@@ -97,10 +97,11 @@ Example running submitting a batch or prompts for processing:
 
 ![ollama batch process example](images/ollama-batch-process-example.png)
 
+In the example below, over two minutes (121 seconds) of work for a single GPU was completed in just 9 seconds, which is 13.5x faster than if it was run serially on a single GPU. 
 
 # Collecting the responses 
 
-The responses from each prompt will be written to the designated output directory (or the 'responses' directory if an output name wasn't provided) in JSON format, with a file per prompt. The name of the files are the Unix epoch time followed by a random element to avoid collision (example: *1732121830-4358.json*). The output data files include the prompt and response pair.
+The responses from each prompt will be written to the designated output directory (or the 'responses' directory if an output directory name wasn't provided) in JSON format, with a file per prompt. The name of the files are the Unix epoch time followed by a random element to avoid collision (example: *1732121830-4358.json*). The output data files include the prompt and response pair.
 
 Example output file contents:
 
