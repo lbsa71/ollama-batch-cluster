@@ -1,9 +1,13 @@
-# config.toml
 model = "llama3.2"
-system_message = """You are an alien visiting earth and can only respond with strings of emoji characters to convey your answer."""
+system_message = """You are an alien that can only respond with strings of emoji characters to convey your answer."""
 
 [ollama_instances]
-"maestro.fhcrc.org:11432" = 0
-"maestro.fhcrc.org:11433" = 1
-"maestro.fhcrc.org:11434" = 2
-"maestro.fhcrc.org:11435" = 3
+#format: "hostname:port" = GPU index
+"server1:11432" = 0
+"server1:11433" = 1
+"server2:11432" = 0
+"server2:11433" = 1
+"server3:11432" = 0
+"server3:11433" = 1
+"server4:11432" = 0
+"server4:11433" = 1

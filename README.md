@@ -6,11 +6,11 @@ This project started after I tried to get Ollama to make full use of a system wi
 
 The following sections will so you how to use the code in this repo to set this up and use it to run batch jobs against a number of GPUs/servers.
 
-These instructions assume that you are already know how to install/use Ollama and are familiar with Python.
+These instructions assume that you are already know how to install/use Ollama and are familiar with editing files, and running scripts. If you are new to Ollama and what to learn how to use it, see [my article](https://medium.com/p/913e50d6b7f0/) that covers the basics. 
 
 ## Starting the Ollama servers
 
-The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided *ollama-batch-servers.sh* shell script. It only takes a single argument which is an integer indicating the number of GPUs in the system.
+The first thing we'll need to do is start up the Ollama servers, one per GPU. If you only have one GPU, or one GPU per multiple servers, and Ollama is already running, you probably don't need to this. To start the Ollama servers, one per GPU, we are going to use the provided [*ollama-batch-servers.sh*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/ollama-batch-servers.sh) shell script. It only takes a single argument which is an integer indicating the number of GPUs in the system.
 
 **Usage:**
 
@@ -72,7 +72,7 @@ system_message = """You are an alien that can only respond with strings of emoji
 
 ## Running a batch job
 
-Now that we have our servers running, prompts prepared and a configuration, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided *ollama-batch-process.py*. But first we'll need to install the required dependencies, the *ollama* and *toml* modules:
+Now that we have our servers running, prompts prepared and a configuration, it's time to process the prompts across the cluster of hosts and GPUs. To do that we'll use the provided [*ollama-batch-process.py*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/response-printer.py). But first we'll need to install the required dependencies, the *ollama* and *toml* modules:
 
 ```bash
 pip install ollama toml
@@ -93,16 +93,59 @@ options:
                         Directory to save the response JSON files
 ```
 
-Example running the client:
-
-```
-python ollama-batch-process.py --config config.toml --prompts prompts.jsonl --output_dir batch10
-```
+Example running submitting a batch or prompts for processing:
 
 ![ollama batch process example](images/ollama-batch-process-example.png)
 
 
-# retriving the responses
+# Collecting the responses 
 
-* JSON files
-* response-printer.py
+The responses from each prompt will be written to the designated output directory (or the 'responses' directory if an output name wasn't provided) in JSON format, with a file per prompt. The name of the files are the Unix epoch time followed by a random element to avoid collision (example: *1732121830-4358.json*). The output data files include the prompt and response pair.
+
+Example output file contents:
+
+```JSON
+{
+    "prompt": "Why is the sky blue?",
+    "response": "The sky appears blue because molecules in Earth's atmosphere scatter shorter blue wavelengths of sunlight more than longer wavelengths like red."
+}
+```
+
+If you what to combine all the responses into a single output, the provided [*response-printer.py*](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/response-printer.py) script will merge the responses into a single output. 
+
+Usage:
+
+```
+python response-printer <directory of response JSON files>
+```
+
+The following is an example of the combined responses using emoji output to keep it short:
+
+```
+########################################
+# File: 1732088793-9394.json
+########################################
+Prompt:
+Discuss the influence of Roman culture on the development of Western civilization.
+
+Response:
+🏯💫🔥📚💡👑🤴🏻💪🌎️🕊️👸💃🏻🕺😍
+
+########################################
+# File: 1732088814-4841.json
+########################################
+Prompt:
+How did the Roman Empire maintain control over such a vast territory?
+
+Response:
+🏛️🔒💪🚣‍♂️🌄📜👑💼
+
+########################################
+# File: 1732121810-9808.json
+########################################
+Prompt:
+How did the Roman legal system shape the foundation of modern law?
+
+Response:
+🏛️📜🔒👮‍♂️💼🕊️🚫👫🤝
+```
