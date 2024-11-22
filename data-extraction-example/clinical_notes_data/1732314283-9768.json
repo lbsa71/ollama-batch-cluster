@@ -1,0 +1,4 @@
+{
+    "prompt": "Ava Parker (MRN: 345901), a 29-year-old female, visited on 07/22/2023 with severe cramping and abnormal menstrual bleeding. Diagnosis: uterine fibroids. She was referred to a gynecologist for further evaluation and management.",
+    "response": "{\n  \"mrn\": \"345901\",\n  \"patient_name\": \"Ava Parker\",\n  \"age\": 29,\n  \"sex\": \"female\",\n  \"visit_date\": \"07/22/2023\",\n  \"reason_for_visit\": \"severe cramping and abnormal menstrual bleeding\",\n  \"diagnosis\": \"uterine fibroids\",\n  \"medications\": []\n}"
+}

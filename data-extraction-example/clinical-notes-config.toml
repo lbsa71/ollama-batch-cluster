@@ -1,0 +1,26 @@
+model = "qwen2.5:32b"
+
+system_message = """
+Your task is to extract structured data from unstructured clinical notes. For each input, you must extract the following fields if present and respond only with a JSON object in the exact format below. Do not provide any other responses or comments.
+
+{
+  "mrn": "",
+  "patient_name": "",
+  "age": 0,
+  "sex": "",
+  "visit_date": "",
+  "reason_for_visit": "",
+  "diagnosis": "",
+  "medications": []
+}
+
+If a field is not present in the input, leave it empty or as an empty array ("[]" for "medications").
+
+Only respond with the JSON object, nothing else.
+"""
+
+[ollama_instances]
+"maestro.fhcrc.org:11432" = 0
+"maestro.fhcrc.org:11433" = 1
+"maestro.fhcrc.org:11434" = 2
+"maestro.fhcrc.org:11435" = 3

@@ -1,0 +1,4 @@
+{
+    "prompt": "Isabella Reed (MRN: 445901), a 22-year-old female, visited on 05/15/2023 with fever and sore throat. Monospot test was positive for mononucleosis. She was advised on supportive care and to avoid strenuous activities.",
+    "response": "{\n  \"mrn\": \"445901\",\n  \"patient_name\": \"Isabella Reed\",\n  \"age\": 22,\n  \"sex\": \"female\",\n  \"visit_date\": \"05/15/2023\",\n  \"reason_for_visit\": \"fever and sore throat\",\n  \"diagnosis\": \"mononucleosis\",\n  \"medications\": []\n}"
+}

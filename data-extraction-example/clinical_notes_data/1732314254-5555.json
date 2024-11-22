@@ -1,0 +1,4 @@
+{
+    "prompt": "David Wilson (MRN: 112345), a 55-year-old man, visited on 09/09/2023 for his annual physical exam. He had no specific complaints and no significant changes in his medical history. Routine labs were ordered, and no new medications were initiated. He was encouraged to maintain his healthy lifestyle.",
+    "response": "{\n  \"mrn\": \"112345\",\n  \"patient_name\": \"David Wilson\",\n  \"age\": 55,\n  \"sex\": \"man\",\n  \"visit_date\": \"09/09/2023\",\n  \"reason_for_visit\": \"annual physical exam\",\n  \"diagnosis\": \"\",\n  \"medications\": []\n}"
+}

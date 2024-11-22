@@ -1,0 +1,4 @@
+{
+    "prompt": "Emily Ross (MRN: 223789), a 45-year-old female, visited on 08/18/2023 with abdominal discomfort and bloating. Diagnosis: irritable bowel syndrome (IBS). She was started on dietary changes and prescribed dicyclomine for symptom relief.",
+    "response": "{\n  \"mrn\": \"223789\",\n  \"patient_name\": \"Emily Ross\",\n  \"age\": 45,\n  \"sex\": \"female\",\n  \"visit_date\": \"08/18/2023\",\n  \"reason_for_visit\": \"abdominal discomfort and bloating\",\n  \"diagnosis\": \"irritable bowel syndrome (IBS)\",\n  \"medications\": [\"dicyclomine\"]\n}"
+}

@@ -1,0 +1,4 @@
+{
+    "prompt": "Jack Morgan (MRN: 212678), a 62-year-old male, visited on 07/31/2023 for frequent urination and nighttime awakenings. Diagnosis: benign prostatic hyperplasia (BPH). He was started on tamsulosin and advised to follow up in a month.",
+    "response": "{\n  \"mrn\": \"212678\",\n  \"patient_name\": \"Jack Morgan\",\n  \"age\": 62,\n  \"sex\": \"male\",\n  \"visit_date\": \"07/31/2023\",\n  \"reason_for_visit\": \"frequent urination and nighttime awakenings\",\n  \"diagnosis\": \"benign prostatic hyperplasia (BPH)\",\n  \"medications\": [\"tamsulosin\"]\n}"
+}

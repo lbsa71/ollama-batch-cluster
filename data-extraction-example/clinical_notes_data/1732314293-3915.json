@@ -1,0 +1,4 @@
+{
+    "prompt": "Abigail Kelly (MRN: 667123), a 48-year-old female, visited on 10/02/2023 with a two-week history of sharp chest pain. After evaluation, diagnosis was determined to be costochondritis. She was prescribed ibuprofen and advised on gentle stretching exercises.",
+    "response": "{\n  \"mrn\": \"667123\",\n  \"patient_name\": \"Abigail Kelly\",\n  \"age\": 48,\n  \"sex\": \"female\",\n  \"visit_date\": \"10/02/2023\",\n  \"reason_for_visit\": \"two-week history of sharp chest pain\",\n  \"diagnosis\": \"costochondritis\",\n  \"medications\": [\"ibuprofen\"]\n}"
+}

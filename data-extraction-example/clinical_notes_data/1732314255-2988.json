@@ -1,0 +1,4 @@
+{
+    "prompt": "On 06/18/2023, Thomas Moore (MRN: 334567), a 72-year-old male, visited for worsening shortness of breath over the past week. A thorough workup revealed heart failure, and he was started on furosemide and carvedilol. Follow-up was scheduled to monitor his response to treatment.",
+    "response": "{\n  \"mrn\": \"334567\",\n  \"patient_name\": \"Thomas Moore\",\n  \"age\": 72,\n  \"sex\": \"male\",\n  \"visit_date\": \"06/18/2023\",\n  \"reason_for_visit\": \"worsening shortness of breath over the past week\",\n  \"diagnosis\": \"heart failure\",\n  \"medications\": [\"furosemide\", \"carvedilol\"]\n}"
+}

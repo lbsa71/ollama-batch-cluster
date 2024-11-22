@@ -1,0 +1,4 @@
+{
+    "prompt": "Visit on April 20, 2023. Jane Smith (MRN: 234567), 32 years old, presented with persistent and debilitating headaches that have been occurring for the past month. Reason for visit: chronic migraines. She was prescribed sumatriptan and advised on lifestyle modifications. Diagnosis confirmed as migraine after ruling out secondary causes.",
+    "response": "{\n  \"mrn\": \"234567\",\n  \"patient_name\": \"Jane Smith\",\n  \"age\": 32,\n  \"sex\": \"\",\n  \"visit_date\": \"April 20, 2023\",\n  \"reason_for_visit\": \"chronic migraines\",\n  \"diagnosis\": \"migraine\",\n  \"medications\": [\"sumatriptan\"]\n}"
+}

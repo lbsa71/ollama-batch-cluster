@@ -1,0 +1,4 @@
+{
+    "prompt": "Lucas Hall (MRN: 543210), a 22-year-old male, was seen on 01/05/2023 for a swollen ankle following a basketball injury. Diagnosis: ankle sprain. He was prescribed ibuprofen and advised to use a brace and ice for swelling.",
+    "response": "{\n  \"mrn\": \"543210\",\n  \"patient_name\": \"Lucas Hall\",\n  \"age\": 22,\n  \"sex\": \"male\",\n  \"visit_date\": \"01/05/2023\",\n  \"reason_for_visit\": \"swollen ankle following a basketball injury\",\n  \"diagnosis\": \"ankle sprain\",\n  \"medications\": [\"ibuprofen\"]\n}"
+}

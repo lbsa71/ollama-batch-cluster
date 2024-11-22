@@ -1,0 +1,4 @@
+{
+    "prompt": "Olivia Martin (MRN: 101234), a 33-year-old female, presented on 05/10/2023 with a sore throat, fever, and difficulty swallowing. A rapid strep test confirmed strep throat. She was prescribed amoxicillin and advised on supportive care measures.",
+    "response": "{\n  \"mrn\": \"101234\",\n  \"patient_name\": \"Olivia Martin\",\n  \"age\": 33,\n  \"sex\": \"female\",\n  \"visit_date\": \"05/10/2023\",\n  \"reason_for_visit\": \"sore throat, fever, and difficulty swallowing\",\n  \"diagnosis\": \"strep throat\",\n  \"medications\": [\"amoxicillin\"]\n}"
+}

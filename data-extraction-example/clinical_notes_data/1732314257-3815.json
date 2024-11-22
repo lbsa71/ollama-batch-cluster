@@ -1,0 +1,4 @@
+{
+    "prompt": "Jennifer Scott (MRN: 445678), a 36-year-old woman, attended on 02/12/2023 complaining of nausea and vomiting lasting two days. Diagnosis: viral gastroenteritis. She was advised to maintain hydration and rest. No specific medications were prescribed as symptoms were expected to resolve spontaneously.",
+    "response": "{\n  \"mrn\": \"445678\",\n  \"patient_name\": \"Jennifer Scott\",\n  \"age\": 36,\n  \"sex\": \"woman\",\n  \"visit_date\": \"02/12/2023\",\n  \"reason_for_visit\": \"nausea and vomiting lasting two days\",\n  \"diagnosis\": \"viral gastroenteritis\",\n  \"medications\": []\n}"
+}

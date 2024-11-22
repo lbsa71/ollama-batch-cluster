@@ -1,0 +1,4 @@
+{
+    "prompt": "Mason Walker (MRN: 765432), a 51-year-old male, presented on 02/28/2023 with complaints of severe headaches and blurred vision. A CT scan showed no abnormalities. Diagnosis: migraine with aura. Sumatriptan was prescribed, and lifestyle changes were recommended.",
+    "response": "{\n  \"mrn\": \"765432\",\n  \"patient_name\": \"Mason Walker\",\n  \"age\": 51,\n  \"sex\": \"male\",\n  \"visit_date\": \"02/28/2023\",\n  \"reason_for_visit\": \"severe headaches and blurred vision\",\n  \"diagnosis\": \"migraine with aura\",\n  \"medications\": [\"Sumatriptan\"]\n}"
+}

@@ -1,0 +1,4 @@
+{
+    "prompt": "Ethan Evans (MRN: 556012), a 39-year-old male, presented on 09/19/2023 with difficulty sleeping and feeling constantly on edge. Diagnosis: generalized anxiety disorder (GAD). He was prescribed sertraline and referred for therapy.",
+    "response": "{\n  \"mrn\": \"556012\",\n  \"patient_name\": \"Ethan Evans\",\n  \"age\": 39,\n  \"sex\": \"male\",\n  \"visit_date\": \"09/19/2023\",\n  \"reason_for_visit\": \"difficulty sleeping and feeling constantly on edge\",\n  \"diagnosis\": \"generalized anxiety disorder (GAD)\",\n  \"medications\": [\"sertraline\"]\n}"
+}

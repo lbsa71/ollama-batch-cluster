@@ -84,7 +84,7 @@ async def main(config_path, prompts_path, output_dir):
     config = toml.load(config_path)
     model = config.get("model", "llama3.2")
     gpus = config["ollama_instances"]
-    system_msg = json.loads(f'{{"role": "system", "content": "{config.get("system_message")}"}}')
+    system_msg = json.loads(f'{{"role": "system", "content": {json.dumps(config.get("system_message"))}}}')
 
     # Load prompts from JSONL file
     prompts = []

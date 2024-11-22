@@ -1,0 +1,4 @@
+{
+    "prompt": "James Kim (MRN: 556789), a 42-year-old male, visited on 04/30/2023 for right knee pain that had been worsening over several months. Imaging confirmed osteoarthritis. He was advised to use ibuprofen for pain relief and start a physical therapy program to improve joint function.",
+    "response": "{\n  \"mrn\": \"556789\",\n  \"patient_name\": \"James Kim\",\n  \"age\": 42,\n  \"sex\": \"male\",\n  \"visit_date\": \"04/30/2023\",\n  \"reason_for_visit\": \"right knee pain that had been worsening over several months\",\n  \"diagnosis\": \"osteoarthritis\",\n  \"medications\": [\"ibuprofen\"]\n}"
+}

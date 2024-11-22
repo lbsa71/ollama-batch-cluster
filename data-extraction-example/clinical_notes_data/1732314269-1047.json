@@ -1,0 +1,4 @@
+{
+    "prompt": "Ethan Johnson (MRN: 987654), a 70-year-old male, came on 06/25/2023 for evaluation of frequent falls. Diagnosis: Parkinson’s disease. He was started on carbidopa-levodopa and referred to physical therapy for balance training.",
+    "response": "{\n  \"mrn\": \"987654\",\n  \"patient_name\": \"Ethan Johnson\",\n  \"age\": 70,\n  \"sex\": \"male\",\n  \"visit_date\": \"06/25/2023\",\n  \"reason_for_visit\": \"evaluation of frequent falls\",\n  \"diagnosis\": \"Parkinson’s disease\",\n  \"medications\": [\"carbidopa-levodopa\"]\n}"
+}

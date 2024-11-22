@@ -1,0 +1,706 @@
+[
+  {
+    "mrn": "543210",
+    "patient_name": "Lucas Hall",
+    "age": 22,
+    "sex": "male",
+    "visit_date": "01/05/2023",
+    "reason_for_visit": "swollen ankle following a basketball injury",
+    "diagnosis": "ankle sprain",
+    "medications": [
+      "ibuprofen"
+    ]
+  },
+  {
+    "mrn": "123789",
+    "patient_name": "Mia Peterson",
+    "age": 46,
+    "sex": "female",
+    "visit_date": "01/15/2023",
+    "reason_for_visit": "persistent cough and low-grade fever",
+    "diagnosis": "mild pneumonia",
+    "medications": [
+      "azithromycin"
+    ]
+  },
+  {
+    "mrn": "112678",
+    "patient_name": "Elijah Gonzalez",
+    "age": 58,
+    "sex": "male",
+    "visit_date": "07/09/2023",
+    "reason_for_visit": "chronic headaches and neck stiffness",
+    "diagnosis": "tension headaches",
+    "medications": [
+      "Amitriptyline"
+    ]
+  },
+  {
+    "mrn": "667123",
+    "patient_name": "Abigail Kelly",
+    "age": 48,
+    "sex": "female",
+    "visit_date": "10/02/2023",
+    "reason_for_visit": "two-week history of sharp chest pain",
+    "diagnosis": "costochondritis",
+    "medications": [
+      "ibuprofen"
+    ]
+  },
+  {
+    "mrn": "889345",
+    "patient_name": "Mia Walker",
+    "age": 41,
+    "sex": "female",
+    "visit_date": "01/08/2023",
+    "reason_for_visit": "low-grade fever, joint aches, and fatigue",
+    "diagnosis": "systemic lupus erythematosus (SLE)",
+    "medications": []
+  },
+  {
+    "mrn": "765432",
+    "patient_name": "Mason Walker",
+    "age": 51,
+    "sex": "male",
+    "visit_date": "02/28/2023",
+    "reason_for_visit": "severe headaches and blurred vision",
+    "diagnosis": "migraine with aura",
+    "medications": [
+      "Sumatriptan"
+    ]
+  },
+  {
+    "mrn": "876543",
+    "patient_name": "Ava Bennett",
+    "age": 33,
+    "sex": "female",
+    "visit_date": "10/10/2023",
+    "reason_for_visit": "sharp lower abdominal pain",
+    "diagnosis": "ovarian cyst rupture",
+    "medications": []
+  },
+  {
+    "mrn": "445901",
+    "patient_name": "Isabella Reed",
+    "age": 22,
+    "sex": "female",
+    "visit_date": "05/15/2023",
+    "reason_for_visit": "fever and sore throat",
+    "diagnosis": "mononucleosis",
+    "medications": []
+  },
+  {
+    "mrn": "990456",
+    "patient_name": "Benjamin Cook",
+    "age": 67,
+    "sex": "male",
+    "visit_date": "04/11/2023",
+    "reason_for_visit": "evaluation of difficulty swallowing",
+    "diagnosis": "esophageal stricture",
+    "medications": []
+  },
+  {
+    "mrn": "314159",
+    "patient_name": "Sophia Adams",
+    "age": 29,
+    "sex": "female",
+    "visit_date": "01/12/2023",
+    "reason_for_visit": "persistent dizziness and nausea for two days",
+    "diagnosis": "vertigo, likely due to a viral infection",
+    "medications": [
+      "Meclizine"
+    ]
+  },
+  {
+    "mrn": "112358",
+    "patient_name": "Emma Wright",
+    "age": 25,
+    "sex": "female",
+    "visit_date": "09/02/2023",
+    "reason_for_visit": "noticing an irregular lump in her right breast",
+    "diagnosis": "",
+    "medications": []
+  },
+  {
+    "mrn": "271828",
+    "patient_name": "Matthew Rodriguez",
+    "age": 54,
+    "sex": "male",
+    "visit_date": "08/18/2023",
+    "reason_for_visit": "rash and itching on his back",
+    "diagnosis": "shingles",
+    "medications": [
+      "valacyclovir"
+    ]
+  },
+  {
+    "mrn": "212678",
+    "patient_name": "Jack Morgan",
+    "age": 62,
+    "sex": "male",
+    "visit_date": "07/31/2023",
+    "reason_for_visit": "frequent urination and nighttime awakenings",
+    "diagnosis": "benign prostatic hyperplasia (BPH)",
+    "medications": [
+      "tamsulosin"
+    ]
+  },
+  {
+    "mrn": "345678",
+    "patient_name": "Mark Johnson",
+    "age": 50,
+    "sex": "male",
+    "visit_date": "02/02/2023",
+    "reason_for_visit": "shortness of breath and a persistent cough",
+    "diagnosis": "signs consistent with COPD",
+    "medications": [
+      "bronchodilators"
+    ]
+  },
+  {
+    "mrn": "567890",
+    "patient_name": "Emily Zhang",
+    "age": 40,
+    "sex": "woman",
+    "visit_date": "07/10/2023",
+    "reason_for_visit": "severe abdominal pain",
+    "diagnosis": "gastritis",
+    "medications": [
+      "omeprazole"
+    ]
+  },
+  {
+    "mrn": "112345",
+    "patient_name": "David Wilson",
+    "age": 55,
+    "sex": "man",
+    "visit_date": "09/09/2023",
+    "reason_for_visit": "annual physical exam",
+    "diagnosis": "",
+    "medications": []
+  },
+  {
+    "mrn": "890123",
+    "patient_name": "Michael Brown",
+    "age": 29,
+    "sex": "male",
+    "visit_date": "May 8, 2023",
+    "reason_for_visit": "fever, fatigue, and body aches for the past three days",
+    "diagnosis": "influenza",
+    "medications": [
+      "Tamiflu"
+    ]
+  },
+  {
+    "mrn": "321098",
+    "patient_name": "Jacob Baker",
+    "age": 66,
+    "sex": "male",
+    "visit_date": "03/20/2023",
+    "reason_for_visit": "worsening shortness of breath",
+    "diagnosis": "chronic obstructive pulmonary disease exacerbation",
+    "medications": [
+      "prednisone",
+      "albuterol inhalation therapy"
+    ]
+  },
+  {
+    "mrn": "654321",
+    "patient_name": "Sophia Thompson",
+    "age": 49,
+    "sex": "female",
+    "visit_date": "05/11/2023",
+    "reason_for_visit": "chronic knee pain",
+    "diagnosis": "osteoarthritis",
+    "medications": [
+      "acetaminophen"
+    ]
+  },
+  {
+    "mrn": "789345",
+    "patient_name": "Charlotte Clark",
+    "age": 28,
+    "sex": "female",
+    "visit_date": "09/04/2023",
+    "reason_for_visit": "persistent sore throat",
+    "diagnosis": "streptococcal pharyngitis",
+    "medications": [
+      "amoxicillin"
+    ]
+  },
+  {
+    "mrn": "334890",
+    "patient_name": "Lucas Wood",
+    "age": 33,
+    "sex": "male",
+    "visit_date": "02/02/2023",
+    "reason_for_visit": "twisting his ankle during a soccer game",
+    "diagnosis": "ankle sprain",
+    "medications": [
+      "ibuprofen"
+    ]
+  },
+  {
+    "mrn": "345901",
+    "patient_name": "Ava Parker",
+    "age": 29,
+    "sex": "female",
+    "visit_date": "07/22/2023",
+    "reason_for_visit": "severe cramping and abnormal menstrual bleeding",
+    "diagnosis": "uterine fibroids",
+    "medications": []
+  },
+  {
+    "mrn": "990123",
+    "patient_name": "Robert Hall",
+    "age": 60,
+    "sex": "male",
+    "visit_date": "09/01/2023",
+    "reason_for_visit": "persistent cough and mild fever",
+    "diagnosis": "bronchitis",
+    "medications": [
+      "azithromycin"
+    ]
+  },
+  {
+    "mrn": "223789",
+    "patient_name": "Emily Ross",
+    "age": 45,
+    "sex": "female",
+    "visit_date": "08/18/2023",
+    "reason_for_visit": "abdominal discomfort and bloating",
+    "diagnosis": "irritable bowel syndrome (IBS)",
+    "medications": [
+      "dicyclomine"
+    ]
+  },
+  {
+    "mrn": "901567",
+    "patient_name": "Amelia Bennett",
+    "age": 19,
+    "sex": "female",
+    "visit_date": "11/01/2023",
+    "reason_for_visit": "itchy rash over her arms and legs",
+    "diagnosis": "eczema",
+    "medications": [
+      "topical steroid",
+      "moisturizer"
+    ]
+  },
+  {
+    "mrn": "605432",
+    "patient_name": "Daniel King",
+    "age": 64,
+    "sex": "male",
+    "visit_date": "04/14/2023",
+    "reason_for_visit": "evaluation of swelling in his legs",
+    "diagnosis": "venous insufficiency",
+    "medications": []
+  },
+  {
+    "mrn": "706543",
+    "patient_name": "Evelyn James",
+    "age": 58,
+    "sex": "female",
+    "visit_date": "10/16/2023",
+    "reason_for_visit": "persistent lower back pain",
+    "diagnosis": "degenerative disc disease",
+    "medications": [
+      "gabapentin"
+    ]
+  },
+  {
+    "mrn": "807654",
+    "patient_name": "Henry Rivera",
+    "age": 27,
+    "sex": "male",
+    "visit_date": "08/04/2023",
+    "reason_for_visit": "red, itchy eye",
+    "diagnosis": "allergic conjunctivitis",
+    "medications": [
+      "ketotifen eye drops"
+    ]
+  },
+  {
+    "mrn": "101234",
+    "patient_name": "Olivia Martin",
+    "age": 33,
+    "sex": "female",
+    "visit_date": "05/10/2023",
+    "reason_for_visit": "sore throat, fever, and difficulty swallowing",
+    "diagnosis": "strep throat",
+    "medications": [
+      "amoxicillin"
+    ]
+  },
+  {
+    "mrn": "567123",
+    "patient_name": "Sophia Harris",
+    "age": 35,
+    "sex": "female",
+    "visit_date": "05/13/2023",
+    "reason_for_visit": "recurrent urinary urgency and burning",
+    "diagnosis": "urinary tract infection (UTI)",
+    "medications": [
+      "nitrofurantoin"
+    ]
+  },
+  {
+    "mrn": "234567",
+    "patient_name": "Jane Smith",
+    "age": 32,
+    "sex": "",
+    "visit_date": "April 20, 2023",
+    "reason_for_visit": "chronic migraines",
+    "diagnosis": "migraine",
+    "medications": [
+      "sumatriptan"
+    ]
+  },
+  {
+    "mrn": "456789",
+    "patient_name": "Sarah Lopez",
+    "age": 27,
+    "sex": "female",
+    "visit_date": "June 5, 2023",
+    "reason_for_visit": "wellness exam",
+    "diagnosis": "",
+    "medications": []
+  },
+  {
+    "mrn": "789012",
+    "patient_name": "Karen Davis",
+    "age": 37,
+    "sex": "woman",
+    "visit_date": "10/14/2023",
+    "reason_for_visit": "complaints of a worsening skin rash over her arms and neck",
+    "diagnosis": "contact dermatitis, likely due to a new detergent",
+    "medications": [
+      "Hydrocortisone cream"
+    ]
+  },
+  {
+    "mrn": "334567",
+    "patient_name": "Thomas Moore",
+    "age": 72,
+    "sex": "male",
+    "visit_date": "06/18/2023",
+    "reason_for_visit": "worsening shortness of breath over the past week",
+    "diagnosis": "heart failure",
+    "medications": [
+      "furosemide",
+      "carvedilol"
+    ]
+  },
+  {
+    "mrn": "109876",
+    "patient_name": "Elijah Clark",
+    "age": 59,
+    "sex": "male",
+    "visit_date": "06/18/2023",
+    "reason_for_visit": "complaining of persistent heartburn",
+    "diagnosis": "gastroesophageal reflux disease (GERD)",
+    "medications": [
+      "Omeprazole"
+    ]
+  },
+  {
+    "mrn": "890456",
+    "patient_name": "James Carter",
+    "age": 61,
+    "sex": "male",
+    "visit_date": "04/14/2023",
+    "reason_for_visit": "episodes of dizziness and unsteady gait",
+    "diagnosis": "transient ischemic attacks (TIAs)",
+    "medications": [
+      "aspirin"
+    ]
+  },
+  {
+    "mrn": "223456",
+    "patient_name": "Lucy Carter",
+    "age": 24,
+    "sex": "female",
+    "visit_date": "August 1, 2023",
+    "reason_for_visit": "complaints of anxiety that has been interfering with her daily life",
+    "diagnosis": "generalized anxiety disorder (GAD)",
+    "medications": [
+      "sertraline"
+    ]
+  },
+  {
+    "mrn": "141421",
+    "patient_name": "Olivia Turner",
+    "age": 37,
+    "sex": "female",
+    "visit_date": "04/06/2023",
+    "reason_for_visit": "complaints of fatigue and weight gain",
+    "diagnosis": "hypothyroidism",
+    "medications": [
+      "levothyroxine"
+    ]
+  },
+  {
+    "mrn": "345678",
+    "patient_name": "Isabella Moore",
+    "age": 19,
+    "sex": "female",
+    "visit_date": "03/08/2023",
+    "reason_for_visit": "symptoms of nausea, abdominal cramping, and diarrhea for two days",
+    "diagnosis": "food poisoning",
+    "medications": [
+      "loperamide"
+    ]
+  },
+  {
+    "mrn": "223606",
+    "patient_name": "Noah Martinez",
+    "age": 62,
+    "sex": "male",
+    "visit_date": "07/14/2023",
+    "reason_for_visit": "complaints of joint pain and stiffness in the mornings",
+    "diagnosis": "rheumatoid arthritis",
+    "medications": [
+      "Methotrexate"
+    ]
+  },
+  {
+    "mrn": "234890",
+    "patient_name": "Oliver Scott",
+    "age": 53,
+    "sex": "male",
+    "visit_date": "03/05/2023",
+    "reason_for_visit": "chest discomfort and mild breathlessness",
+    "diagnosis": "gastroesophageal reflux disease (GERD)",
+    "medications": [
+      "Omeprazole"
+    ]
+  },
+  {
+    "mrn": "778901",
+    "patient_name": "Paul Evans",
+    "age": 48,
+    "sex": "man",
+    "visit_date": "July 25, 2023",
+    "reason_for_visit": "intermittent chest discomfort",
+    "diagnosis": "non-cardiac chest pain, likely musculoskeletal",
+    "medications": []
+  },
+  {
+    "mrn": "456012",
+    "patient_name": "Noah Anderson",
+    "age": 60,
+    "sex": "male",
+    "visit_date": "02/17/2023",
+    "reason_for_visit": "worsening leg pain after walking short distances",
+    "diagnosis": "peripheral arterial disease (PAD)",
+    "medications": [
+      "cilostazol"
+    ]
+  },
+  {
+    "mrn": "889012",
+    "patient_name": "Angela White",
+    "age": 30,
+    "sex": "female",
+    "visit_date": "03/20/2023",
+    "reason_for_visit": "fatigue and lightheadedness that had persisted for a few weeks",
+    "diagnosis": "iron deficiency anemia",
+    "medications": [
+      "iron supplements"
+    ]
+  },
+  {
+    "mrn": "556789",
+    "patient_name": "James Kim",
+    "age": 42,
+    "sex": "male",
+    "visit_date": "04/30/2023",
+    "reason_for_visit": "right knee pain that had been worsening over several months",
+    "diagnosis": "osteoarthritis",
+    "medications": [
+      "ibuprofen"
+    ]
+  },
+  {
+    "mrn": "101567",
+    "patient_name": "Luna Howard",
+    "age": 26,
+    "sex": "female",
+    "visit_date": "06/22/2023",
+    "reason_for_visit": "persistent cough and wheezing",
+    "diagnosis": "asthma exacerbation",
+    "medications": [
+      "albuterol",
+      "prednisone"
+    ]
+  },
+  {
+    "mrn": "908765",
+    "patient_name": "Charlotte Allen",
+    "age": 48,
+    "sex": "female",
+    "visit_date": "11/07/2023",
+    "reason_for_visit": "severe fatigue and unintentional weight loss",
+    "diagnosis": "diabetes mellitus",
+    "medications": [
+      "metformin"
+    ]
+  },
+  {
+    "mrn": "210987",
+    "patient_name": "Mia Carter",
+    "age": 40,
+    "sex": "female",
+    "visit_date": "07/23/2023",
+    "reason_for_visit": "frequent headaches and difficulty concentrating",
+    "diagnosis": "tension headaches",
+    "medications": [
+      "amitriptyline"
+    ]
+  },
+  {
+    "mrn": "445678",
+    "patient_name": "Jennifer Scott",
+    "age": 36,
+    "sex": "woman",
+    "visit_date": "02/12/2023",
+    "reason_for_visit": "nausea and vomiting lasting two days",
+    "diagnosis": "viral gastroenteritis",
+    "medications": []
+  },
+  {
+    "mrn": "987654",
+    "patient_name": "Ethan Johnson",
+    "age": 70,
+    "sex": "male",
+    "visit_date": "06/25/2023",
+    "reason_for_visit": "evaluation of frequent falls",
+    "diagnosis": "Parkinson\u2019s disease",
+    "medications": [
+      "carbidopa-levodopa"
+    ]
+  },
+  {
+    "mrn": "161803",
+    "patient_name": "Liam Hernandez",
+    "age": 43,
+    "sex": "male",
+    "visit_date": "05/30/2023",
+    "reason_for_visit": "complaints of chest tightness after exercise",
+    "diagnosis": "exercise-induced bronchospasm",
+    "medications": [
+      "Albuterol"
+    ]
+  },
+  {
+    "mrn": "778234",
+    "patient_name": "Henry Gray",
+    "age": 55,
+    "sex": "male",
+    "visit_date": "03/28/2023",
+    "reason_for_visit": "complaints of progressive fatigue and pallor",
+    "diagnosis": "iron deficiency anemia",
+    "medications": [
+      "iron supplements"
+    ]
+  },
+  {
+    "mrn": "678234",
+    "patient_name": "William Roberts",
+    "age": 50,
+    "sex": "male",
+    "visit_date": "06/20/2023",
+    "reason_for_visit": "joint pain and swelling in his fingers",
+    "diagnosis": "rheumatoid arthritis",
+    "medications": [
+      "Methotrexate"
+    ]
+  },
+  {
+    "mrn": "667890",
+    "patient_name": "Maria Gonzalez",
+    "age": 58,
+    "sex": "female",
+    "visit_date": "11/05/2023",
+    "reason_for_visit": "follow-up on her diabetes",
+    "diagnosis": "diabetes",
+    "medications": [
+      "metformin",
+      "glipizide"
+    ]
+  },
+  {
+    "mrn": "123456",
+    "patient_name": "John Doe",
+    "age": 45,
+    "sex": "male",
+    "visit_date": "03/15/2023",
+    "reason_for_visit": "severe chest pain that started a few hours prior",
+    "diagnosis": "angina",
+    "medications": [
+      "aspirin",
+      "nitroglycerin"
+    ]
+  },
+  {
+    "mrn": "556012",
+    "patient_name": "Ethan Evans",
+    "age": 39,
+    "sex": "male",
+    "visit_date": "09/19/2023",
+    "reason_for_visit": "difficulty sleeping and feeling constantly on edge",
+    "diagnosis": "generalized anxiety disorder (GAD)",
+    "medications": [
+      "sertraline"
+    ]
+  },
+  {
+    "mrn": "901234",
+    "patient_name": "Alice Taylor",
+    "age": 47,
+    "sex": "female",
+    "visit_date": "03/30/2023",
+    "reason_for_visit": "complaining of lower back pain that started after heavy lifting",
+    "diagnosis": "muscle strain",
+    "medications": [
+      "ibuprofen"
+    ]
+  },
+  {
+    "mrn": "678901",
+    "patient_name": "Henry Lee",
+    "age": 65,
+    "sex": "male",
+    "visit_date": "01/22/2023",
+    "reason_for_visit": "follow-up on his long-standing hypertension",
+    "diagnosis": "",
+    "medications": [
+      "lisinopril"
+    ]
+  },
+  {
+    "mrn": "212345",
+    "patient_name": "William Perez",
+    "age": 67,
+    "sex": "male",
+    "visit_date": "October 3, 2023",
+    "reason_for_visit": "frequent urination and difficulty starting his stream",
+    "diagnosis": "benign prostatic hyperplasia",
+    "medications": [
+      "tamsulosin"
+    ]
+  },
+  {
+    "mrn": "432109",
+    "patient_name": "Amelia Green",
+    "age": 31,
+    "sex": "female",
+    "visit_date": "09/15/2023",
+    "reason_for_visit": "complaints of excessive fatigue",
+    "diagnosis": "low vitamin D levels",
+    "medications": [
+      "vitamin D supplements"
+    ]
+  }
+]

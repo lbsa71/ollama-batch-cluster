@@ -1,0 +1,4 @@
+{
+    "prompt": "Henry Gray (MRN: 778234), a 55-year-old male, came on 03/28/2023 with complaints of progressive fatigue and pallor. Blood tests revealed iron deficiency anemia. He was started on iron supplements and referred for gastrointestinal evaluation.",
+    "response": "{\n  \"mrn\": \"778234\",\n  \"patient_name\": \"Henry Gray\",\n  \"age\": 55,\n  \"sex\": \"male\",\n  \"visit_date\": \"03/28/2023\",\n  \"reason_for_visit\": \"complaints of progressive fatigue and pallor\",\n  \"diagnosis\": \"iron deficiency anemia\",\n  \"medications\": [\"iron supplements\"]\n}"
+}

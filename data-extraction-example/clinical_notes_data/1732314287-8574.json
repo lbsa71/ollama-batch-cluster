@@ -1,0 +1,4 @@
+{
+    "prompt": "Amelia Bennett (MRN: 901567), a 19-year-old female, came on 11/01/2023 with an itchy rash over her arms and legs. Diagnosis: eczema. She was prescribed a topical steroid and a moisturizer and advised to avoid harsh soaps.",
+    "response": "{\n  \"mrn\": \"901567\",\n  \"patient_name\": \"Amelia Bennett\",\n  \"age\": 19,\n  \"sex\": \"female\",\n  \"visit_date\": \"11/01/2023\",\n  \"reason_for_visit\": \"itchy rash over her arms and legs\",\n  \"diagnosis\": \"eczema\",\n  \"medications\": [\"topical steroid\", \"moisturizer\"]\n}"
+}

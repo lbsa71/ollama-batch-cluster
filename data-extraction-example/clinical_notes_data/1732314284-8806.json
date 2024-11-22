@@ -1,0 +1,4 @@
+{
+    "prompt": "Sophia Harris (MRN: 567123), a 35-year-old female, visited on 05/13/2023 with recurrent urinary urgency and burning. Urinalysis confirmed a urinary tract infection (UTI). She was prescribed nitrofurantoin and encouraged to increase water intake.",
+    "response": "{\n  \"mrn\": \"567123\",\n  \"patient_name\": \"Sophia Harris\",\n  \"age\": 35,\n  \"sex\": \"female\",\n  \"visit_date\": \"05/13/2023\",\n  \"reason_for_visit\": \"recurrent urinary urgency and burning\",\n  \"diagnosis\": \"urinary tract infection (UTI)\",\n  \"medications\": [\"nitrofurantoin\"]\n}"
+}

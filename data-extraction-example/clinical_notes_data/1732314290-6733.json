@@ -1,0 +1,4 @@
+{
+    "prompt": "Lucas Wood (MRN: 334890), a 33-year-old male, came to the clinic on 02/02/2023 after twisting his ankle during a soccer game. Diagnosis: ankle sprain. He was advised to use ice, elevate the foot, and take ibuprofen for pain.",
+    "response": "{\n  \"mrn\": \"334890\",\n  \"patient_name\": \"Lucas Wood\",\n  \"age\": 33,\n  \"sex\": \"male\",\n  \"visit_date\": \"02/02/2023\",\n  \"reason_for_visit\": \"twisting his ankle during a soccer game\",\n  \"diagnosis\": \"ankle sprain\",\n  \"medications\": [\"ibuprofen\"]\n}"
+}

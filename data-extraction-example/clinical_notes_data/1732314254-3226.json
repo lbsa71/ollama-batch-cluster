@@ -1,0 +1,4 @@
+{
+    "prompt": "Alice Taylor (MRN: 901234), a 47-year-old female, came on 03/30/2023 complaining of lower back pain that started after heavy lifting. Examination revealed muscle strain. She was advised to take ibuprofen and start physical therapy. No red flags for other conditions were noted.",
+    "response": "{\n  \"mrn\": \"901234\",\n  \"patient_name\": \"Alice Taylor\",\n  \"age\": 47,\n  \"sex\": \"female\",\n  \"visit_date\": \"03/30/2023\",\n  \"reason_for_visit\": \"complaining of lower back pain that started after heavy lifting\",\n  \"diagnosis\": \"muscle strain\",\n  \"medications\": [\"ibuprofen\"]\n}"
+}

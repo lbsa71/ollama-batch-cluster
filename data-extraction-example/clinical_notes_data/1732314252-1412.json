@@ -1,0 +1,4 @@
+{
+    "prompt": "Karen Davis (MRN: 789012), a 37-year-old woman, arrived on 10/14/2023 with complaints of a worsening skin rash over her arms and neck. On examination, she was diagnosed with contact dermatitis, likely due to a new detergent. Hydrocortisone cream was prescribed, and she was advised to avoid irritants.",
+    "response": "{\n  \"mrn\": \"789012\",\n  \"patient_name\": \"Karen Davis\",\n  \"age\": 37,\n  \"sex\": \"woman\",\n  \"visit_date\": \"10/14/2023\",\n  \"reason_for_visit\": \"complaints of a worsening skin rash over her arms and neck\",\n  \"diagnosis\": \"contact dermatitis, likely due to a new detergent\",\n  \"medications\": [\"Hydrocortisone cream\"]\n}"
+}

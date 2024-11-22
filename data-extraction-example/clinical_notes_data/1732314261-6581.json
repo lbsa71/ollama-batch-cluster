@@ -1,0 +1,4 @@
+{
+    "prompt": "On 09/01/2023, Robert Hall (MRN: 990123), a 60-year-old male, came in with a persistent cough and mild fever. Chest X-ray ruled out pneumonia. Diagnosis: bronchitis. He was prescribed azithromycin and advised to rest and stay hydrated.",
+    "response": "{\n  \"mrn\": \"990123\",\n  \"patient_name\": \"Robert Hall\",\n  \"age\": 60,\n  \"sex\": \"male\",\n  \"visit_date\": \"09/01/2023\",\n  \"reason_for_visit\": \"persistent cough and mild fever\",\n  \"diagnosis\": \"bronchitis\",\n  \"medications\": [\"azithromycin\"]\n}"
+}

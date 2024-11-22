@@ -1,0 +1,4 @@
+{
+    "prompt": "On June 5, 2023, Sarah Lopez (MRN: 456789), a 27-year-old female, visited for a routine checkup. She reported no specific complaints but requested birth control counseling. Reason: wellness exam. No new diagnosis was made, and no medications were prescribed during the visit.",
+    "response": "{\n  \"mrn\": \"456789\",\n  \"patient_name\": \"Sarah Lopez\",\n  \"age\": 27,\n  \"sex\": \"female\",\n  \"visit_date\": \"June 5, 2023\",\n  \"reason_for_visit\": \"wellness exam\",\n  \"diagnosis\": \"\",\n  \"medications\": []\n}"
+}

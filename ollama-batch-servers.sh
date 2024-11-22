@@ -38,7 +38,7 @@ for ((i=0; i<NUM_GPUS; i++)); do
 
     # Environment variables
     export OLLAMA_LOAD_TIMEOUT="120m"
-    export OLLAMA_KEEP_ALIVE="-1"
+    export OLLAMA_KEEP_ALIVE="120m"
     export OLLAMA_NUM_PARALLEL="16"
     export OLLAMA_HOST="${HOST}:${PORT}"
     export CUDA_VISIBLE_DEVICES="$i"

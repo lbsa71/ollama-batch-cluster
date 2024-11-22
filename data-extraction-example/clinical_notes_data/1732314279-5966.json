@@ -1,0 +1,4 @@
+{
+    "prompt": "Daniel King (MRN: 605432), a 64-year-old male, visited the clinic on 04/14/2023 for evaluation of swelling in his legs. Diagnosis: venous insufficiency. Compression stockings were recommended, and he was advised to elevate his legs frequently.",
+    "response": "{\n  \"mrn\": \"605432\",\n  \"patient_name\": \"Daniel King\",\n  \"age\": 64,\n  \"sex\": \"male\",\n  \"visit_date\": \"04/14/2023\",\n  \"reason_for_visit\": \"evaluation of swelling in his legs\",\n  \"diagnosis\": \"venous insufficiency\",\n  \"medications\": []\n}"
+}

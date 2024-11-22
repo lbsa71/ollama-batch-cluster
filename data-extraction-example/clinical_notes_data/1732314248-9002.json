@@ -1,0 +1,4 @@
+{
+    "prompt": "Patient: John Doe (MRN: 123456), a 45-year-old male, visited the clinic on 03/15/2023 complaining of severe chest pain that started a few hours prior. He was diagnosed with angina following an ECG and blood tests. He was prescribed aspirin and nitroglycerin for management and advised to follow up in two weeks.",
+    "response": "{\n  \"mrn\": \"123456\",\n  \"patient_name\": \"John Doe\",\n  \"age\": 45,\n  \"sex\": \"male\",\n  \"visit_date\": \"03/15/2023\",\n  \"reason_for_visit\": \"severe chest pain that started a few hours prior\",\n  \"diagnosis\": \"angina\",\n  \"medications\": [\"aspirin\", \"nitroglycerin\"]\n}"
+}

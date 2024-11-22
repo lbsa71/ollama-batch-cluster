@@ -1,0 +1,4 @@
+{
+    "prompt": "Maria Gonzalez (MRN: 667890), a 58-year-old female, was seen on 11/05/2023 for follow-up on her diabetes. She reported difficulty controlling her blood sugar despite adherence to her current medications. Her treatment was adjusted to include metformin and glipizide, and she was scheduled for a nutrition counseling session.",
+    "response": "{\n  \"mrn\": \"667890\",\n  \"patient_name\": \"Maria Gonzalez\",\n  \"age\": 58,\n  \"sex\": \"female\",\n  \"visit_date\": \"11/05/2023\",\n  \"reason_for_visit\": \"follow-up on her diabetes\",\n  \"diagnosis\": \"diabetes\",\n  \"medications\": [\"metformin\", \"glipizide\"]\n}"
+}

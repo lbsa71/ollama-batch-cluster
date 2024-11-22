@@ -1,0 +1,4 @@
+{
+    "prompt": "William Roberts (MRN: 678234), a 50-year-old male, presented on 06/20/2023 with complaints of joint pain and swelling in his fingers. Blood work confirmed rheumatoid arthritis. Methotrexate was prescribed, and he was referred to rheumatology.",
+    "response": "{\n  \"mrn\": \"678234\",\n  \"patient_name\": \"William Roberts\",\n  \"age\": 50,\n  \"sex\": \"male\",\n  \"visit_date\": \"06/20/2023\",\n  \"reason_for_visit\": \"joint pain and swelling in his fingers\",\n  \"diagnosis\": \"rheumatoid arthritis\",\n  \"medications\": [\"Methotrexate\"]\n}"
+}

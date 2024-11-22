@@ -1,0 +1,4 @@
+{
+    "prompt": "William Perez (MRN: 212345), a 67-year-old male, visited on October 3, 2023, complaining of frequent urination and difficulty starting his stream. After evaluation, he was diagnosed with benign prostatic hyperplasia and prescribed tamsulosin to relieve symptoms.",
+    "response": "{\n  \"mrn\": \"212345\",\n  \"patient_name\": \"William Perez\",\n  \"age\": 67,\n  \"sex\": \"male\",\n  \"visit_date\": \"October 3, 2023\",\n  \"reason_for_visit\": \"frequent urination and difficulty starting his stream\",\n  \"diagnosis\": \"benign prostatic hyperplasia\",\n  \"medications\": [\"tamsulosin\"]\n}"
+}
