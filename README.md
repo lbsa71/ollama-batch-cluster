@@ -150,3 +150,128 @@ How did the Roman legal system shape the foundation of modern law?
 Response:
 🏛️📜🔒👮‍♂️💼🕊️🚫👫🤝
 ```
+
+# Batch Data Extraction
+
+***Note: the clinical notes in this section are synthetic and contains no PII or PHI***
+
+In the example above it just provided an unstrucutred text (emojois actually 😀), but you can also use this method to extract and combine structured data such as JSON out of a batch of unstructured inputs. In this example, we'll take a bunch of unstructured clinc visit notes, process them batch style accross multiple GPUS (it would also work is a single GPU, just much slower) that will extract data into a defined data struture (defined in the system message located in the configuration file) which will result in a json file per clinic note in the designated directory. We'll then use a provided script to merge those data files into a single json document. The resulting data could be imported into database a records, or a parquet file in a data lake, etc.
+
+**Configuration**
+
+First we'll need to create our configuration file that provides a system prompt to tell the LLM how to behave and the resulting data structure we want to conform the extracted data to. In this example we are using the 32b version of [Qwen2.5](https://ollama.com/library/qwen2.5) model. This model is good at following instructions and handleing JSON, use a smaller model as needed to fit the VRAM capacity of your GPUs 
+
+```toml
+model = "qwen2.5:32b"
+system_message = """
+Your task is to extract structured data from unstructured clinical notes. For each input, you must extract the following fields if present and respond only with a JSON object in the exact format below. Do not provide any other responses or comments.
+{
+  "mrn": "",
+  "patient_name": "",
+  "age": 0,
+  "sex": "",
+  "visit_date": "",
+  "reason_for_visit": "",
+  "diagnosis": "",
+  "medications": []
+}
+If a field is not present in the input, leave it empty or as an empty array ("[]" for "medications").
+Only respond with the JSON object, nothing else.
+"""
+
+# two servers, each with 2 L40S GPUs:
+[ollama_instances]
+"gpu-server1:11432" = 0
+"gpu-server1:11433" = 1
+"gpu-server2:11434" = 0
+"gpu-server2:11435" = 1
+```
+
+**Data Preperation**
+
+Next take your collection of data and put them in the required JSONL format.
+
+
+```JSON
+{"role": "user", "content": "Patient: John Doe (MRN: 123456), a 45-year-old male, visited the clinic on 03/15/2023 complaining of severe chest pain that started a few hours prior. He was diagnosed with angina following an ECG and blood tests. He was prescribed aspirin and nitroglycerin for management and advised to follow up in two weeks."}
+{"role": "user", "content": "Visit on April 20, 2023. Jane Smith (MRN: 234567), 32 years old, presented with persistent and debilitating headaches that have been occurring for the past month. Reason for visit: chronic migraines. She was prescribed sumatriptan and advised on lifestyle modifications. Diagnosis confirmed as migraine after ruling out secondary causes."}
+{"role": "user", "content": "Mark Johnson (MRN: 345678), male, age 50, came to the hospital on 02/02/2023 reporting shortness of breath and a persistent cough. Examination revealed signs consistent with COPD. Pulmonary function tests were ordered to confirm the diagnosis, and he was started on bronchodilators for symptom relief."}
+{"role": "user", "content": "On June 5, 2023, Sarah Lopez (MRN: 456789), a 27-year-old female, visited for a routine checkup. She reported no specific complaints but requested birth control counseling. Reason: wellness exam. No new diagnosis was made, and no medications were prescribed during the visit."}
+{"role": "user", "content": "Visit Date: 07/10/2023. Patient: Emily Zhang (MRN: 567890), a 40-year-old woman, presented with a three-day history of severe abdominal pain. A thorough examination suggested gastritis, and omeprazole was prescribed for acid suppression. She was advised to avoid spicy foods and alcohol."}
+{"role": "user", "content": "Patient Henry Lee (MRN: 678901), a 65-year-old male, came to the clinic on 01/22/2023 for a follow-up on his long-standing hypertension. He reported good adherence to his medication regimen, which includes lisinopril. No new diagnosis was made, and his current treatment plan was continued."}
+{"role": "user", "content": "Karen Davis (MRN: 789012), a 37-year-old woman, arrived on 10/14/2023 with complaints of a worsening skin rash over her arms and neck. On examination, she was diagnosed with contact dermatitis, likely due to a new detergent. Hydrocortisone cream was prescribed, and she was advised to avoid irritants."}
+{"role": "user", "content": "Michael Brown (MRN: 890123), a 29-year-old male, was seen on May 8, 2023, with complaints of fever, fatigue, and body aches for the past three days. After ruling out bacterial infections, he was diagnosed with influenza. Medications: Tamiflu was prescribed, and hydration and rest were recommended."}
+{"role": "user", "content": "Alice Taylor (MRN: 901234), a 47-year-old female, came on 03/30/2023 complaining of lower back pain that started after heavy lifting. Examination revealed muscle strain. She was advised to take ibuprofen and start physical therapy. No red flags for other conditions were noted."}
+{"role": "user", "content": "David Wilson (MRN: 112345), a 55-year-old man, visited on 09/09/2023 for his annual physical exam. He had no specific complaints and no significant changes in his medical history. Routine labs were ordered, and no new medications were initiated. He was encouraged to maintain his healthy lifestyle."}
+{"role": "user", "content": "Lucy Carter (MRN: 223456), a 24-year-old female, presented on August 1, 2023, with complaints of anxiety that has been interfering with her daily life. She was diagnosed with generalized anxiety disorder (GAD) and prescribed sertraline. She was also referred to a counselor for therapy."}
+{"role": "user", "content": "On 06/18/2023, Thomas Moore (MRN: 334567), a 72-year-old male, visited for worsening shortness of breath over the past week. A thorough workup revealed heart failure, and he was started on furosemide and carvedilol. Follow-up was scheduled to monitor his response to treatment."}
+{"role": "user", "content": "Jennifer Scott (MRN: 445678), a 36-year-old woman, attended on 02/12/2023 complaining of nausea and vomiting lasting two days. Diagnosis: viral gastroenteritis. She was advised to maintain hydration and rest. No specific medications were prescribed as symptoms were expected to resolve spontaneously."}
+{"role": "user", "content": "James Kim (MRN: 556789), a 42-year-old male, visited on 04/30/2023 for right knee pain that had been worsening over several months. Imaging confirmed osteoarthritis. He was advised to use ibuprofen for pain relief and start a physical therapy program to improve joint function."}
+{"role": "user", "content": "Maria Gonzalez (MRN: 667890), a 58-year-old female, was seen on 11/05/2023 for follow-up on her diabetes. She reported difficulty controlling her blood sugar despite adherence to her current medications. Her treatment was adjusted to include metformin and glipizide, and she was scheduled for a nutrition counseling session."}
+{"role": "user", "content": "Paul Evans (MRN: 778901), a 48-year-old man, came on July 25, 2023, for intermittent chest discomfort. A detailed evaluation, including ECG, showed no acute changes. Diagnosis: non-cardiac chest pain, likely musculoskeletal. He was reassured and given exercises to reduce tension."}
+```
+
+**Run the batch data extraction**
+
+```bash
+python ollama-batch-process.py --prompts clinical-notes.jsonl --config clinical-notes-config.toml --output_dir clinical_notes_data
+```
+
+sdf
+
+```JSON
+{
+    "prompt": "Patient: John Doe (MRN: 123456), a 45-year-old male, visited the clinic on 03/15/2023 complaining of severe chest pain that started a few hours prior. He was diagnosed with angina following an ECG and blood tests. He was prescribed aspirin and nitroglycerin for management and advised to follow up in two weeks.",
+    "response": "{\n  \"mrn\": \"123456\",\n  \"patient_name\": \"John Doe\",\n  \"age\": 45,\n  \"sex\": \"male\",\n  \"visit_date\": \"03/15/2023\",\n  \"reason_for_visit\": \"severe chest pain that started a few hours prior\",\n  \"diagnosis\": \"angina\",\n  \"medications\": [\"aspirin\", \"nitroglycerin\"]\n}"
+}
+```
+
+sdf
+
+```bash
+python response-json-merge.py --input-dir clinical_notes_data --output-file clinical_notes_data.json
+```
+
+sdf
+
+
+```JSON
+  [{
+    "mrn": "678234",
+    "patient_name": "William Roberts",
+    "age": 50,
+    "sex": "male",
+    "visit_date": "06/20/2023",
+    "reason_for_visit": "joint pain and swelling in his fingers",
+    "diagnosis": "rheumatoid arthritis",
+    "medications": [
+      "Methotrexate"
+    ]
+  },
+  {
+    "mrn": "667890",
+    "patient_name": "Maria Gonzalez",
+    "age": 58,
+    "sex": "female",
+    "visit_date": "11/05/2023",
+    "reason_for_visit": "follow-up on her diabetes",
+    "diagnosis": "diabetes",
+    "medications": [
+      "metformin",
+      "glipizide"
+    ]
+  },
+  {
+    "mrn": "123456",
+    "patient_name": "John Doe",
+    "age": 45,
+    "sex": "male",
+    "visit_date": "03/15/2023",
+    "reason_for_visit": "severe chest pain that started a few hours prior",
+    "diagnosis": "angina",
+    "medications": [
+      "aspirin",
+      "nitroglycerin"
+    ]
+  }]
+```
