@@ -155,11 +155,15 @@ Response:
 
 ***Note: the clinical notes in this section are synthetic and contains no PII or PHI***
 
-In the example above it just provided an unstrucutred text (emojois actually 😀), but you can also use this method to extract and combine structured data such as JSON out of a batch of unstructured inputs. In this example, we'll take a bunch of unstructured clinc visit notes, process them batch style accross multiple GPUS (it would also work is a single GPU, just much slower) that will extract data into a defined data struture (defined in the system message located in the configuration file) which will result in a json file per clinic note in the designated directory. We'll then use a provided script to merge those data files into a single json document. The resulting data could be imported into database a records, or a parquet file in a data lake, etc.
+In the example above it just provided an unstructured text (emojis actually 😀), but you can also use this method to extract and combine structured data such as JSON out of a batch of unstructured inputs. In this example, we'll take a bunch of unstructured clinic visit notes, process them batch style across multiple GPUS (it would also work is a single GPU, just much slower) that will extract data into a defined data structure (defined in the system message located in the configuration file) which will result in a json file per clinic note in the designated directory. We'll then use a provided script to merge those data files into a single json document. The resulting data could be imported into database a records, or a parquet file in a data lake, etc.
+
+All the files (input and example outputs) in this example are provided in the [data-extraction-example](https://github.com/robert-mcdermott/ollama-batch-cluster/tree/main/data-extraction-example) director of this repo.
 
 **Configuration**
 
-First we'll need to create our configuration file that provides a system prompt to tell the LLM how to behave and the resulting data structure we want to conform the extracted data to. In this example we are using the 32b version of [Qwen2.5](https://ollama.com/library/qwen2.5) model. This model is good at following instructions and handleing JSON, use a smaller model as needed to fit the VRAM capacity of your GPUs 
+First we'll need to create our configuration file that provides a system prompt to tell the LLM how to behave and the resulting data structure we want to conform the extracted data to. In this example we are using the 32b version of [Qwen2.5](https://ollama.com/library/qwen2.5) model. This model is good at following instructions and handling JSON, use a smaller model as needed to fit the VRAM capacity of your GPUs 
+
+***Config file:*** [clinical-notes-config.toml](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/data-extraction-example/clinical-notes-config.toml)
 
 ```toml
 model = "qwen2.5:32b"
@@ -187,9 +191,9 @@ Only respond with the JSON object, nothing else.
 "gpu-server2:11435" = 1
 ```
 
-**Data Preperation**
+**Data Preparation**
 
-Next take your collection of data and put them in the required JSONL format.
+Next take your collection of data and put them in the required JSONL format. Below is a sample of the contents of the provided [clinical-notes.jsonl](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/data-extraction-example/clinical-notes.jsonl) data file. 
 
 
 ```JSON
@@ -213,11 +217,15 @@ Next take your collection of data and put them in the required JSONL format.
 
 **Run the batch data extraction**
 
+If the source data and configuration in please, we are now ready to run the data extraction job. Execute the following command:
+
 ```bash
 python ollama-batch-process.py --prompts clinical-notes.jsonl --config clinical-notes-config.toml --output_dir clinical_notes_data
 ```
 
-sdf
+**Collect the Output Data**
+
+After the process is complete, you should have a directory filled with multiple JSON files. The following is the contents of one output files that contains the original clinical note (prompt field) and the resulting structured data (response field):
 
 ```JSON
 {
@@ -226,13 +234,15 @@ sdf
 }
 ```
 
-sdf
+***Merging the Results***
+
+If you want to converge the data of all output JSON files into a single JSON file, you can use the provided [response-json-merge.py](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/response-json-merge.py) script.
 
 ```bash
 python response-json-merge.py --input-dir clinical_notes_data --output-file clinical_notes_data.json
 ```
 
-sdf
+After merging the output data the [file](https://github.com/robert-mcdermott/ollama-batch-cluster/blob/main/data-extraction-example/clinical_notes_data.json) will look like this extract below: 
 
 
 ```JSON
@@ -275,3 +285,5 @@ sdf
     ]
   }]
 ```
+
+Now that you have clean structured data, you can process it via an ETL pipeline to insert it into a database, or convert to a parquet file or similar to ingest by a data lake. 
