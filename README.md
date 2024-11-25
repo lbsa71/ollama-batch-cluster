@@ -217,7 +217,7 @@ Next take your collection of data and put them in the required JSONL format. Bel
 
 **Run the batch data extraction**
 
-If the source data and configuration in please, we are now ready to run the data extraction job. Execute the following command:
+With the source data and configuration in place, we are now ready to run the data extraction job. Execute the following command:
 
 ```bash
 python ollama-batch-process.py --prompts clinical-notes.jsonl --config clinical-notes-config.toml --output_dir clinical_notes_data
@@ -286,4 +286,4 @@ After merging the output data the [file](https://github.com/robert-mcdermott/oll
   }]
 ```
 
-Now that you have clean structured data, you can process it via an ETL pipeline to insert it into a database, or convert to a parquet file or similar to ingest by a data lake. 
+Now that you have clean, structured data, you can process it via an ETL pipeline to insert it into a database, or convert to a parquet file or similar to ingest by a data lake. 
