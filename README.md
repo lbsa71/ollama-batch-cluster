@@ -1,3 +1,5 @@
+![batch-process-ollama-diagram.png](images/batch-process-ollama-diagram.png)
+
 # Ollama Batch Cluster
 
 The code in this repository will allow you to batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. 
