@@ -1,5 +1,7 @@
 ![batch-process-ollama-diagram.png](images/batch-process-ollama-diagram.png)
 
+***Note: This project is now a Medium article published [Here](https://robert-mcdermott.medium.com/large-scale-batch-processing-with-ollama-1e180533fb8a?source=friends_link&sk=0a33d37316347b72a355bf2e9cf57c13)***
+
 # Ollama Batch Cluster
 
 The code in this repository will allow you to batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. 
