@@ -6,6 +6,8 @@ import random
 import time
 import re
 import os
+import sys
+import platform
 from datetime import datetime
 from ollama import AsyncClient
 from pathlib import Path
@@ -19,6 +21,42 @@ def log_message(message):
     """Prints a message with a timestamp."""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"{timestamp}, {message}", flush=True)
+
+# Import platform-specific notification modules
+WINDOWS_NOTIFICATION_AVAILABLE = False
+if platform.system() == "Windows":
+    try:
+        # Use Windows 10 toast notifications if available
+        import winsound
+        WINDOWS_NOTIFICATION_AVAILABLE = True
+    except ImportError:
+        log_message("Windows sound module not available. Sound notifications will not be played.")
+        WINDOWS_NOTIFICATION_AVAILABLE = False
+
+def show_notification(title, message):
+    """Show a system notification if available for the platform."""
+    # Print a prominent message in the console
+    print("\n" + "=" * 80)
+    print(f"📢 {title}")
+    print(f"   {message}")
+    print("=" * 80 + "\n")
+    
+    # Try to play a sound on Windows
+    if platform.system() == "Windows" and WINDOWS_NOTIFICATION_AVAILABLE:
+        try:
+            # Attempt to play the system notification sound
+            winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+            return True
+        except Exception as e:
+            # Fallback to a basic beep if the system sound fails
+            try:
+                winsound.Beep(1000, 500)  # 1000 Hz for 500 milliseconds
+                return True
+            except Exception as e2:
+                log_message(f"Error playing notification sound: {str(e2)}")
+                return False
+    
+    return True  # Return success for non-Windows platforms
 
 async def fetch_url_content(url: str) -> str:
     """Fetch and clean content from a URL using trafilatura."""
@@ -203,8 +241,11 @@ async def chat(prompt, host, model, system_message, context_block=None):
     
     return response['message']['content'], start_time, duration, length
 
-async def worker(host, gpu_index, model, task_queue, output_dir):
+async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
     """Process prompts from the queue using the specified host and GPU."""
+    processed = 0
+    skipped = 0
+    
     while True:
         try:
             # Get a task from the queue
@@ -218,6 +259,7 @@ async def worker(host, gpu_index, model, task_queue, output_dir):
             # Check if we need to regenerate the response
             if not should_regenerate(prompt_id, output_dir, prompt_file_modified_time):
                 log_message(f"Skipping {prompt_id} - prompt unchanged since last run")
+                skipped += 1
                 task_queue.task_done()
                 continue
             
@@ -225,6 +267,7 @@ async def worker(host, gpu_index, model, task_queue, output_dir):
             try:
                 # Process the prompt
                 response_text, start_time, duration, length = await chat(prompt, host, model, system_msg)
+                processed += 1
                 
                 # Calculate words in response
                 word_count = len(response_text.split())
@@ -258,8 +301,14 @@ async def worker(host, gpu_index, model, task_queue, output_dir):
             break
         except Exception as e:
             log_message(f"Worker error: {str(e)}")
+    
+    # Update stats dictionary if provided
+    if stats is not None:
+        stats["processed"] += processed
+        stats["skipped"] += skipped
             
     log_message(f"Worker for {host} (GPU {gpu_index}) shutting down")
+    return processed, skipped
 
 async def process_prompt_with_context(prompt, host, model, system_message, prompt_id=None, prompt_file_modified_time=None, output_dir="responses"):
     """Process a single prompt with context fetching."""
@@ -294,8 +343,11 @@ async def process_prompt_with_context(prompt, host, model, system_message, promp
         length
     )
 
-async def main(config_path, prompts_path, output_dir):
+async def main(config_path, prompts_path, output_dir, no_notify=False):
     """Main function to process prompts using Ollama."""
+    start_time = datetime.now()
+    stats = {"processed": 0, "skipped": 0}
+    
     try:
         # Load configuration
         config = load_config(config_path)
@@ -304,7 +356,8 @@ async def main(config_path, prompts_path, output_dir):
         
         # Load prompts from both specified path and prompts directory
         prompts = load_prompts(prompts_dir="prompts", prompts_files=[prompts_path] if prompts_path else None)
-        log_message(f"Total prompts to process: {len(prompts)}")
+        total_prompts = len(prompts)
+        log_message(f"Total prompts to process: {total_prompts}")
         
         # Create directory for responses
         os.makedirs(output_dir, exist_ok=True)
@@ -328,7 +381,7 @@ async def main(config_path, prompts_path, output_dir):
         tasks = []
         for host, gpu_index in config.get("ollama_instances", {}).items():
             worker_task = asyncio.create_task(
-                worker(host, gpu_index, model, task_queue, output_dir)
+                worker(host, gpu_index, model, task_queue, output_dir, stats)
             )
             tasks.append(worker_task)
         
@@ -338,6 +391,23 @@ async def main(config_path, prompts_path, output_dir):
         
         # Wait for all tasks to complete
         await asyncio.gather(*tasks)
+        
+        # Calculate duration and stats
+        duration = (datetime.now() - start_time).total_seconds()
+        minutes, seconds = divmod(duration, 60)
+        
+        completion_message = (
+            f"Processing completed in {int(minutes)}m {int(seconds)}s. "
+            f"Processed: {stats['processed']}, Skipped: {stats['skipped']}"
+        )
+        log_message(completion_message)
+        
+        # Show notification when done (if not disabled)
+        if not no_notify:
+            show_notification(
+                "Ollama Batch Processing Complete",
+                f"Processed: {stats['processed']}, Skipped: {stats['skipped']} in {int(minutes)}m {int(seconds)}s"
+            )
         
     except asyncio.CancelledError:
         log_message("Process interrupted by user. Exiting...")
@@ -434,11 +504,12 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=str, default="config.toml", help="Path to the configuration TOML file")
     parser.add_argument("--prompts", type=str, help="Path to additional JSON/JSONL file with prompts (will also load from prompts directory)")
     parser.add_argument("--output_dir", type=str, default="responses", help="Directory to save the response JSON files")
+    parser.add_argument("--no-notify", action="store_true", help="Disable sound notification when processing completes")
 
     args = parser.parse_args()
 
     try:
-        asyncio.run(main(args.config, args.prompts, args.output_dir))
+        asyncio.run(main(args.config, args.prompts, args.output_dir, args.no_notify))
         log_message("All prompts processed. Exiting...")
     except KeyboardInterrupt:
         log_message("Process interrupted by user. Exiting...")
