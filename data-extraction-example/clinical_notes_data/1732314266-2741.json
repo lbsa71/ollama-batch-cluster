@@ -1,4 +1,0 @@
-{
-    "prompt": "Liam Hernandez (MRN: 161803), a 43-year-old male, visited on 05/30/2023 with complaints of chest tightness after exercise. Evaluation included stress testing, which revealed no cardiac ischemia. Diagnosis: exercise-induced bronchospasm. Albuterol was prescribed as needed.",
-    "response": "{\n  \"mrn\": \"161803\",\n  \"patient_name\": \"Liam Hernandez\",\n  \"age\": 43,\n  \"sex\": \"male\",\n  \"visit_date\": \"05/30/2023\",\n  \"reason_for_visit\": \"complaints of chest tightness after exercise\",\n  \"diagnosis\": \"exercise-induced bronchospasm\",\n  \"medications\": [\"Albuterol\"]\n}"
-}

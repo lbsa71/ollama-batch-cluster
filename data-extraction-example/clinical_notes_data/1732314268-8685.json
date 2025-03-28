@@ -1,4 +1,0 @@
-{
-    "prompt": "Noah Martinez (MRN: 223606), a 62-year-old male, presented on 07/14/2023 with complaints of joint pain and stiffness in the mornings. Diagnosis: rheumatoid arthritis. Methotrexate was initiated, and he was referred to a rheumatologist for long-term management.",
-    "response": "{\n  \"mrn\": \"223606\",\n  \"patient_name\": \"Noah Martinez\",\n  \"age\": 62,\n  \"sex\": \"male\",\n  \"visit_date\": \"07/14/2023\",\n  \"reason_for_visit\": \"complaints of joint pain and stiffness in the mornings\",\n  \"diagnosis\": \"rheumatoid arthritis\",\n  \"medications\": [\"Methotrexate\"]\n}"
-}

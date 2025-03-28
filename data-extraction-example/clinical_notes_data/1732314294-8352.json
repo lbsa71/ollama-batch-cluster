@@ -1,4 +1,0 @@
-{
-    "prompt": "Mia Walker (MRN: 889345), a 41-year-old female, visited on 01/08/2023 with low-grade fever, joint aches, and fatigue. Diagnosis: systemic lupus erythematosus (SLE). She was referred to a rheumatologist for further management.",
-    "response": "{\n  \"mrn\": \"889345\",\n  \"patient_name\": \"Mia Walker\",\n  \"age\": 41,\n  \"sex\": \"female\",\n  \"visit_date\": \"01/08/2023\",\n  \"reason_for_visit\": \"low-grade fever, joint aches, and fatigue\",\n  \"diagnosis\": \"systemic lupus erythematosus (SLE)\",\n  \"medications\": []\n}"
-}

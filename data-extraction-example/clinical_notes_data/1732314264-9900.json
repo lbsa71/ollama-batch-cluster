@@ -1,4 +1,0 @@
-{
-    "prompt": "Patient: Sophia Adams (MRN: 314159), a 29-year-old female, visited on 01/12/2023 with complaints of persistent dizziness and nausea for two days. She was diagnosed with vertigo, likely due to a viral infection. Meclizine was prescribed, and she was advised to rest and stay hydrated.",
-    "response": "{\n  \"mrn\": \"314159\",\n  \"patient_name\": \"Sophia Adams\",\n  \"age\": 29,\n  \"sex\": \"female\",\n  \"visit_date\": \"01/12/2023\",\n  \"reason_for_visit\": \"persistent dizziness and nausea for two days\",\n  \"diagnosis\": \"vertigo, likely due to a viral infection\",\n  \"medications\": [\"Meclizine\"]\n}"
-}

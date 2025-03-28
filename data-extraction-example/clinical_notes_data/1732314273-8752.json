@@ -1,4 +1,0 @@
-{
-    "prompt": "Sophia Thompson (MRN: 654321), a 49-year-old female, visited the clinic on 05/11/2023 for chronic knee pain. Diagnosis: osteoarthritis. She was prescribed acetaminophen and referred for a consultation about joint injections.",
-    "response": "{\n  \"mrn\": \"654321\",\n  \"patient_name\": \"Sophia Thompson\",\n  \"age\": 49,\n  \"sex\": \"female\",\n  \"visit_date\": \"05/11/2023\",\n  \"reason_for_visit\": \"chronic knee pain\",\n  \"diagnosis\": \"osteoarthritis\",\n  \"medications\": [\"acetaminophen\"]\n}"
-}

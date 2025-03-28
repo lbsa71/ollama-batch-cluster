@@ -1,4 +1,0 @@
-{
-    "prompt": "Angela White (MRN: 889012), a 30-year-old female, visited on 03/20/2023 for fatigue and lightheadedness that had persisted for a few weeks. Lab results indicated iron deficiency anemia. She was prescribed iron supplements and advised to increase her dietary intake of iron-rich foods.",
-    "response": "{\n  \"mrn\": \"889012\",\n  \"patient_name\": \"Angela White\",\n  \"age\": 30,\n  \"sex\": \"female\",\n  \"visit_date\": \"03/20/2023\",\n  \"reason_for_visit\": \"fatigue and lightheadedness that had persisted for a few weeks\",\n  \"diagnosis\": \"iron deficiency anemia\",\n  \"medications\": [\"iron supplements\"]\n}"
-}

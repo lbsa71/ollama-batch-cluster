@@ -1,4 +1,0 @@
-{
-    "prompt": "Paul Evans (MRN: 778901), a 48-year-old man, came on July 25, 2023, for intermittent chest discomfort. A detailed evaluation, including ECG, showed no acute changes. Diagnosis: non-cardiac chest pain, likely musculoskeletal. He was reassured and given exercises to reduce tension.",
-    "response": "{\n  \"mrn\": \"778901\",\n  \"patient_name\": \"Paul Evans\",\n  \"age\": 48,\n  \"sex\": \"man\",\n  \"visit_date\": \"July 25, 2023\",\n  \"reason_for_visit\": \"intermittent chest discomfort\",\n  \"diagnosis\": \"non-cardiac chest pain, likely musculoskeletal\",\n  \"medications\": []\n}"
-}

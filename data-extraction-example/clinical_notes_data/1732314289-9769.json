@@ -1,4 +1,0 @@
-{
-    "prompt": "Elijah Gonzalez (MRN: 112678), a 58-year-old male, presented on 07/09/2023 with chronic headaches and neck stiffness. Diagnosis: tension headaches. Amitriptyline was prescribed, and he was advised to practice stress reduction techniques.",
-    "response": "{\n  \"mrn\": \"112678\",\n  \"patient_name\": \"Elijah Gonzalez\",\n  \"age\": 58,\n  \"sex\": \"male\",\n  \"visit_date\": \"07/09/2023\",\n  \"reason_for_visit\": \"chronic headaches and neck stiffness\",\n  \"diagnosis\": \"tension headaches\",\n  \"medications\": [\"Amitriptyline\"]\n}"
-}

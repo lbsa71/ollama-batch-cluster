@@ -1,4 +1,0 @@
-{
-    "prompt": "Patient: Mia Peterson (MRN: 123789), a 46-year-old female, visited on 01/15/2023 with complaints of persistent cough and low-grade fever. Chest X-ray showed mild pneumonia. She was prescribed azithromycin and advised to rest and stay hydrated.",
-    "response": "{\n  \"mrn\": \"123789\",\n  \"patient_name\": \"Mia Peterson\",\n  \"age\": 46,\n  \"sex\": \"female\",\n  \"visit_date\": \"01/15/2023\",\n  \"reason_for_visit\": \"persistent cough and low-grade fever\",\n  \"diagnosis\": \"mild pneumonia\",\n  \"medications\": [\"azithromycin\"]\n}"
-}

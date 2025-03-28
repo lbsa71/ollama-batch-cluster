@@ -1,4 +1,0 @@
-{
-    "prompt": "Amelia Green (MRN: 432109), a 31-year-old female, came on 09/15/2023 with complaints of excessive fatigue. Blood tests revealed low vitamin D levels. She was prescribed vitamin D supplements and advised to increase sun exposure.",
-    "response": "{\n  \"mrn\": \"432109\",\n  \"patient_name\": \"Amelia Green\",\n  \"age\": 31,\n  \"sex\": \"female\",\n  \"visit_date\": \"09/15/2023\",\n  \"reason_for_visit\": \"complaints of excessive fatigue\",\n  \"diagnosis\": \"low vitamin D levels\",\n  \"medications\": [\"vitamin D supplements\"]\n}"
-}

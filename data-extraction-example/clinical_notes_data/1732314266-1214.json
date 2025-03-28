@@ -1,4 +1,0 @@
-{
-    "prompt": "Olivia Turner (MRN: 141421), a 37-year-old female, presented on 04/06/2023 with complaints of fatigue and weight gain. A workup revealed hypothyroidism. She was started on levothyroxine and advised to follow up in six weeks for dose adjustment.",
-    "response": "{\n  \"mrn\": \"141421\",\n  \"patient_name\": \"Olivia Turner\",\n  \"age\": 37,\n  \"sex\": \"female\",\n  \"visit_date\": \"04/06/2023\",\n  \"reason_for_visit\": \"complaints of fatigue and weight gain\",\n  \"diagnosis\": \"hypothyroidism\",\n  \"medications\": [\"levothyroxine\"]\n}"
-}

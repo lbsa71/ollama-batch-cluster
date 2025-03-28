@@ -1,4 +1,0 @@
-{
-    "prompt": "Patient Henry Lee (MRN: 678901), a 65-year-old male, came to the clinic on 01/22/2023 for a follow-up on his long-standing hypertension. He reported good adherence to his medication regimen, which includes lisinopril. No new diagnosis was made, and his current treatment plan was continued.",
-    "response": "{\n  \"mrn\": \"678901\",\n  \"patient_name\": \"Henry Lee\",\n  \"age\": 65,\n  \"sex\": \"male\",\n  \"visit_date\": \"01/22/2023\",\n  \"reason_for_visit\": \"follow-up on his long-standing hypertension\",\n  \"diagnosis\": \"\",\n  \"medications\": [\"lisinopril\"]\n}"
-}

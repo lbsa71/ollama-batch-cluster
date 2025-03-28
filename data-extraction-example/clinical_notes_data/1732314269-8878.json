@@ -1,4 +1,0 @@
-{
-    "prompt": "Isabella Moore (MRN: 345678), a 19-year-old female, visited on 03/08/2023 with symptoms of nausea, abdominal cramping, and diarrhea for two days. Diagnosis: food poisoning. She was advised to stay hydrated and use loperamide as needed.",
-    "response": "{\n  \"mrn\": \"345678\",\n  \"patient_name\": \"Isabella Moore\",\n  \"age\": 19,\n  \"sex\": \"female\",\n  \"visit_date\": \"03/08/2023\",\n  \"reason_for_visit\": \"symptoms of nausea, abdominal cramping, and diarrhea for two days\",\n  \"diagnosis\": \"food poisoning\",\n  \"medications\": [\"loperamide\"]\n}"
-}

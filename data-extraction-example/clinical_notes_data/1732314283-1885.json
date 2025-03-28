@@ -1,4 +1,0 @@
-{
-    "prompt": "Noah Anderson (MRN: 456012), a 60-year-old male, came on 02/17/2023 complaining of worsening leg pain after walking short distances. Diagnosis: peripheral arterial disease (PAD). He was started on cilostazol and referred to vascular surgery for further evaluation.",
-    "response": "{\n  \"mrn\": \"456012\",\n  \"patient_name\": \"Noah Anderson\",\n  \"age\": 60,\n  \"sex\": \"male\",\n  \"visit_date\": \"02/17/2023\",\n  \"reason_for_visit\": \"worsening leg pain after walking short distances\",\n  \"diagnosis\": \"peripheral arterial disease (PAD)\",\n  \"medications\": [\"cilostazol\"]\n}"
-}

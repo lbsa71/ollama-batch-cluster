@@ -1,4 +1,0 @@
-{
-    "prompt": "Ava Bennett (MRN: 876543), a 33-year-old female, was seen on 10/10/2023 for sharp lower abdominal pain. Ultrasound confirmed ovarian cyst rupture. She was given pain management instructions and advised to follow up with her OB/GYN.",
-    "response": "{\n  \"mrn\": \"876543\",\n  \"patient_name\": \"Ava Bennett\",\n  \"age\": 33,\n  \"sex\": \"female\",\n  \"visit_date\": \"10/10/2023\",\n  \"reason_for_visit\": \"sharp lower abdominal pain\",\n  \"diagnosis\": \"ovarian cyst rupture\",\n  \"medications\": []\n}"
-}

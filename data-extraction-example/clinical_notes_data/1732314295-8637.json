@@ -1,4 +1,0 @@
-{
-    "prompt": "Benjamin Cook (MRN: 990456), a 67-year-old male, presented on 04/11/2023 for evaluation of difficulty swallowing. Diagnosis: esophageal stricture. He was referred to gastroenterology for endoscopy and dilation.",
-    "response": "{\n  \"mrn\": \"990456\",\n  \"patient_name\": \"Benjamin Cook\",\n  \"age\": 67,\n  \"sex\": \"male\",\n  \"visit_date\": \"04/11/2023\",\n  \"reason_for_visit\": \"evaluation of difficulty swallowing\",\n  \"diagnosis\": \"esophageal stricture\",\n  \"medications\": []\n}"
-}

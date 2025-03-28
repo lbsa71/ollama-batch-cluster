@@ -1,4 +1,0 @@
-{
-    "prompt": "Matthew Rodriguez (MRN: 271828), a 54-year-old male, visited the clinic on 08/18/2023 reporting a rash and itching on his back. Diagnosis: shingles. Medications: valacyclovir was started, and he was given pain management advice.",
-    "response": "{\n  \"mrn\": \"271828\",\n  \"patient_name\": \"Matthew Rodriguez\",\n  \"age\": 54,\n  \"sex\": \"male\",\n  \"visit_date\": \"08/18/2023\",\n  \"reason_for_visit\": \"rash and itching on his back\",\n  \"diagnosis\": \"shingles\",\n  \"medications\": [\"valacyclovir\"]\n}"
-}

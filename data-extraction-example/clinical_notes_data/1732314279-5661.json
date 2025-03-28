@@ -1,4 +1,0 @@
-{
-    "prompt": "Evelyn James (MRN: 706543), a 58-year-old female, was seen on 10/16/2023 for persistent lower back pain. Imaging showed mild disc degeneration. Diagnosis: degenerative disc disease. She was prescribed gabapentin and referred to physical therapy.",
-    "response": "{\n  \"mrn\": \"706543\",\n  \"patient_name\": \"Evelyn James\",\n  \"age\": 58,\n  \"sex\": \"female\",\n  \"visit_date\": \"10/16/2023\",\n  \"reason_for_visit\": \"persistent lower back pain\",\n  \"diagnosis\": \"degenerative disc disease\",\n  \"medications\": [\"gabapentin\"]\n}"
-}

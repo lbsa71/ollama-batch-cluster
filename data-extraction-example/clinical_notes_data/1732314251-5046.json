@@ -1,4 +1,0 @@
-{
-    "prompt": "Visit Date: 07/10/2023. Patient: Emily Zhang (MRN: 567890), a 40-year-old woman, presented with a three-day history of severe abdominal pain. A thorough examination suggested gastritis, and omeprazole was prescribed for acid suppression. She was advised to avoid spicy foods and alcohol.",
-    "response": "{\n  \"mrn\": \"567890\",\n  \"patient_name\": \"Emily Zhang\",\n  \"age\": 40,\n  \"sex\": \"woman\",\n  \"visit_date\": \"07/10/2023\",\n  \"reason_for_visit\": \"severe abdominal pain\",\n  \"diagnosis\": \"gastritis\",\n  \"medications\": [\"omeprazole\"]\n}"
-}

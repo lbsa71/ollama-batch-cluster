@@ -1,4 +1,0 @@
-{
-    "prompt": "Emma Wright (MRN: 112358), a 25-year-old female, was seen on 09/02/2023 after noticing an irregular lump in her right breast. An ultrasound was performed, and she was referred for a biopsy. No medications were prescribed at this time.",
-    "response": "{\n  \"mrn\": \"112358\",\n  \"patient_name\": \"Emma Wright\",\n  \"age\": 25,\n  \"sex\": \"female\",\n  \"visit_date\": \"09/02/2023\",\n  \"reason_for_visit\": \"noticing an irregular lump in her right breast\",\n  \"diagnosis\": \"\",\n  \"medications\": []\n}"
-}

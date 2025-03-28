@@ -1,4 +1,0 @@
-{
-    "prompt": "James Carter (MRN: 890456), a 61-year-old male, was seen on 04/14/2023 for episodes of dizziness and unsteady gait. Workup suggested transient ischemic attacks (TIAs). He was started on aspirin and referred for carotid imaging.",
-    "response": "{\n  \"mrn\": \"890456\",\n  \"patient_name\": \"James Carter\",\n  \"age\": 61,\n  \"sex\": \"male\",\n  \"visit_date\": \"04/14/2023\",\n  \"reason_for_visit\": \"episodes of dizziness and unsteady gait\",\n  \"diagnosis\": \"transient ischemic attacks (TIAs)\",\n  \"medications\": [\"aspirin\"]\n}"
-}

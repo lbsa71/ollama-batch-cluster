@@ -1,4 +1,0 @@
-{
-    "prompt": "Charlotte Clark (MRN: 789345), a 28-year-old female, visited on 09/04/2023 complaining of a persistent sore throat. Rapid strep test was positive. Diagnosis: streptococcal pharyngitis. She was prescribed amoxicillin and advised to avoid close contact until symptoms improved.",
-    "response": "{\n  \"mrn\": \"789345\",\n  \"patient_name\": \"Charlotte Clark\",\n  \"age\": 28,\n  \"sex\": \"female\",\n  \"visit_date\": \"09/04/2023\",\n  \"reason_for_visit\": \"persistent sore throat\",\n  \"diagnosis\": \"streptococcal pharyngitis\",\n  \"medications\": [\"amoxicillin\"]\n}"
-}

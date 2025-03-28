@@ -1,4 +1,0 @@
-{
-    "prompt": "Michael Brown (MRN: 890123), a 29-year-old male, was seen on May 8, 2023, with complaints of fever, fatigue, and body aches for the past three days. After ruling out bacterial infections, he was diagnosed with influenza. Medications: Tamiflu was prescribed, and hydration and rest were recommended.",
-    "response": "{\n  \"mrn\": \"890123\",\n  \"patient_name\": \"Michael Brown\",\n  \"age\": 29,\n  \"sex\": \"male\",\n  \"visit_date\": \"May 8, 2023\",\n  \"reason_for_visit\": \"fever, fatigue, and body aches for the past three days\",\n  \"diagnosis\": \"influenza\",\n  \"medications\": [\"Tamiflu\"]\n}"
-}

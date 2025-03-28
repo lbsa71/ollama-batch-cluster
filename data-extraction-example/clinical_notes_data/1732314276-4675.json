@@ -1,4 +1,0 @@
-{
-    "prompt": "Elijah Clark (MRN: 109876), a 59-year-old male, came to the clinic on 06/18/2023 complaining of persistent heartburn. Diagnosis: gastroesophageal reflux disease (GERD). Omeprazole was prescribed, and dietary modifications were recommended.",
-    "response": "{\n  \"mrn\": \"109876\",\n  \"patient_name\": \"Elijah Clark\",\n  \"age\": 59,\n  \"sex\": \"male\",\n  \"visit_date\": \"06/18/2023\",\n  \"reason_for_visit\": \"complaining of persistent heartburn\",\n  \"diagnosis\": \"gastroesophageal reflux disease (GERD)\",\n  \"medications\": [\"Omeprazole\"]\n}"
-}

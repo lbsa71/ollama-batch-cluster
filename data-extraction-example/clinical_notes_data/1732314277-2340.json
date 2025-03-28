@@ -1,4 +1,0 @@
-{
-    "prompt": "Charlotte Allen (MRN: 908765), a 48-year-old female, visited on 11/07/2023 with complaints of severe fatigue and unintentional weight loss. Blood tests revealed diabetes mellitus. She was started on metformin and referred for a diabetes education class.",
-    "response": "{\n  \"mrn\": \"908765\",\n  \"patient_name\": \"Charlotte Allen\",\n  \"age\": 48,\n  \"sex\": \"female\",\n  \"visit_date\": \"11/07/2023\",\n  \"reason_for_visit\": \"severe fatigue and unintentional weight loss\",\n  \"diagnosis\": \"diabetes mellitus\",\n  \"medications\": [\"metformin\"]\n}"
-}

@@ -1,4 +1,0 @@
-{
-    "prompt": "Jacob Baker (MRN: 321098), a 66-year-old male, presented on 03/20/2023 with worsening shortness of breath. Diagnosis: chronic obstructive pulmonary disease exacerbation. He was started on prednisone and albuterol inhalation therapy.",
-    "response": "{\n  \"mrn\": \"321098\",\n  \"patient_name\": \"Jacob Baker\",\n  \"age\": 66,\n  \"sex\": \"male\",\n  \"visit_date\": \"03/20/2023\",\n  \"reason_for_visit\": \"worsening shortness of breath\",\n  \"diagnosis\": \"chronic obstructive pulmonary disease exacerbation\",\n  \"medications\": [\"prednisone\", \"albuterol inhalation therapy\"]\n}"
-}

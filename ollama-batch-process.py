@@ -58,18 +58,37 @@ def create_context_block(contents: List[str]) -> str:
     if not contents:
         return ""
     
-    context_block = "Contextual Knowledge:\n"
+    # Get current date in unambiguous format
+    current_date = datetime.now().strftime("%B %d, %Y")
+    
+    context_block = "# Context Information\n\n"
+    context_block += f"📅 Current date: {current_date}\n\n"
+    
+    # Add a section for contextual knowledge
+    context_block += "## 📚 Contextual Knowledge\n"
+    context_block += "Below are the relevant context sections that will inform the article:\n\n"
+    
     for i, content in enumerate(contents, 1):
         if content:
-            context_block += f"{i}. {content[:500]}...\n"  # Limit each context to 500 chars
+            context_block += f"### Context Section {i}\n"
+            context_block += f"{content[:500]}...\n\n"
+    
+    # Add a section for writing instructions
+    context_block += "## ✍️ Writing Instructions\n"
+    context_block += "Please use the above context to inform your article. "
+    context_block += "Remember to maintain a friendly, engaging tone while being thorough and accurate.\n\n"
+    
     return context_block
 
-def save_response(prompt, response_text, output_dir):
-    """Saves the response to a JSON file with a unique filename."""
-    # Generate a unique filename using the current epoch time and a random element
-    epoch = int(time.time())
-    random_suffix = random.randint(1000, 9999)
-    filename = f"{epoch}-{random_suffix}.json"
+def save_response(prompt, response_text, output_dir, prompt_id=None):
+    """Saves the response to JSON and TXT files with a unique filename based on prompt ID."""
+    # Use prompt_id as filename, or fallback to a timestamp if no ID provided
+    if prompt_id:
+        base_filename = prompt_id
+    else:
+        epoch = int(time.time())
+        random_suffix = random.randint(1000, 9999)
+        base_filename = f"{epoch}-{random_suffix}"
 
     # Extract think content if present
     think_match = re.search(r'<think>(.*?)</think>', response_text, re.DOTALL)
@@ -89,13 +108,17 @@ def save_response(prompt, response_text, output_dir):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Write the response to the JSON file
-    file_path = output_dir / filename
-    with open(file_path, "w", encoding="utf-8") as json_file:
+    # Write the JSON file
+    json_path = output_dir / f"{base_filename}.json"
+    with open(json_path, "w", encoding="utf-8") as json_file:
         json.dump(output_data, json_file, ensure_ascii=False, indent=4)
         json_file.flush()
 
-    #log_message(f"Response saved to {file_path}")
+    # Write the TXT file with just the response
+    txt_path = output_dir / f"{base_filename}.txt"
+    with open(txt_path, "w", encoding="utf-8") as txt_file:
+        txt_file.write(response_text)
+        txt_file.flush()
 
 async def chat(system_msg, message, host, gpu_index, model, output_dir):
     try:
@@ -106,13 +129,19 @@ async def chat(system_msg, message, host, gpu_index, model, output_dir):
         prompt_text = message['content']
         processed_prompt, urls = process_prompt_with_context(prompt_text)
         
+        # Get prompt ID if present
+        prompt_id = message.get('id')
+        
         # Fetch context if there are URLs
         contexts = []
+        expanded_prompt = prompt_text
         if urls:
             contexts = await fetch_all_contexts(urls)
             context_block = create_context_block(contexts)
             # Add context to system message
             system_msg['content'] = context_block + "\n" + system_msg['content']
+            # Create expanded prompt with context
+            expanded_prompt = context_block + "\n\n" + prompt_text
 
         # Update message with processed prompt
         message['content'] = processed_prompt
@@ -129,8 +158,8 @@ async def chat(system_msg, message, host, gpu_index, model, output_dir):
         # Extract the response content
         response_text = response['message']['content']
 
-        # Save the response to a JSON file
-        save_response(prompt_text, response_text, output_dir)
+        # Save the response to JSON and TXT files with expanded prompt
+        save_response(expanded_prompt, response_text, output_dir, prompt_id)
 
         # Calculate duration and word count
         duration = (end_time - start_time).total_seconds()
@@ -155,7 +184,7 @@ async def worker(host, gpu_index, model, task_queue, output_dir):
 async def main(config_path, prompts_path, output_dir):
     # Get configuration  
     config = toml.load(config_path)
-    model = config.get("model", "llama3.2")
+    model = config["model"]
     gpus = config["ollama_instances"]
     system_msg = json.loads(f'{{"role": "system", "content": {json.dumps(config.get("system_message"))}}}')
 
@@ -163,12 +192,21 @@ async def main(config_path, prompts_path, output_dir):
     prompts = []
     prompts_path = Path(prompts_path)
     
-    # Process JSONL file if it exists
+    # Process input file if it exists
     if prompts_path.is_file():
-        log_message(f"Loading prompts from JSONL file: {prompts_path}")
-        with open(prompts_path, "r") as file:
-            for line in file:
-                prompts.append(json.loads(line))
+        log_message(f"Loading prompts from file: {prompts_path}")
+        if prompts_path.suffix == '.json':
+            with open(prompts_path, "r") as file:
+                data = json.load(file)
+                if isinstance(data, list):
+                    prompts.extend(data)
+                else:
+                    prompts.append(data)
+        else:  # JSONL file
+            with open(prompts_path, "r") as file:
+                for line in file:
+                    if line.strip():
+                        prompts.append(json.loads(line))
     
     # Process prompts directory if it exists
     prompts_dir = Path("prompts")
@@ -176,7 +214,11 @@ async def main(config_path, prompts_path, output_dir):
         log_message(f"Loading prompts from directory: {prompts_dir}")
         for json_file in prompts_dir.glob("*.json"):
             with open(json_file, "r") as file:
-                prompts.append(json.loads(file.read()))
+                data = json.load(file)
+                if isinstance(data, list):
+                    prompts.extend(data)
+                else:
+                    prompts.append(data)
     
     if not prompts:
         raise ValueError("No prompts found in either JSONL file or prompts directory")
@@ -195,6 +237,25 @@ async def main(config_path, prompts_path, output_dir):
 
     # Await the completion of all worker tasks
     await asyncio.gather(*tasks)
+
+async def load_prompts(prompts_file):
+    """Load prompts from a file."""
+    print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}, Loading prompts from file: {prompts_file}")
+    
+    if prompts_file.endswith('.json'):
+        with open(prompts_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return data
+            else:
+                return [data]
+    else:  # JSONL file
+        prompts = []
+        with open(prompts_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    prompts.append(json.loads(line))
+        return prompts
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ollama Batch Processing Client")

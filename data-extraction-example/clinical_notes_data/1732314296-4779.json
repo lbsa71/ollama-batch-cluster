@@ -1,4 +1,0 @@
-{
-    "prompt": "Luna Howard (MRN: 101567), a 26-year-old female, came on 06/22/2023 with persistent cough and wheezing. Diagnosis: asthma exacerbation. She was prescribed albuterol and a short course of prednisone.",
-    "response": "{\n  \"mrn\": \"101567\",\n  \"patient_name\": \"Luna Howard\",\n  \"age\": 26,\n  \"sex\": \"female\",\n  \"visit_date\": \"06/22/2023\",\n  \"reason_for_visit\": \"persistent cough and wheezing\",\n  \"diagnosis\": \"asthma exacerbation\",\n  \"medications\": [\"albuterol\", \"prednisone\"]\n}"
-}

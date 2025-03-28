@@ -1,4 +1,0 @@
-{
-    "prompt": "Henry Rivera (MRN: 807654), a 27-year-old male, presented on 08/04/2023 with a red, itchy eye. Diagnosis: allergic conjunctivitis. He was prescribed ketotifen eye drops and advised to avoid allergens.",
-    "response": "{\n  \"mrn\": \"807654\",\n  \"patient_name\": \"Henry Rivera\",\n  \"age\": 27,\n  \"sex\": \"male\",\n  \"visit_date\": \"08/04/2023\",\n  \"reason_for_visit\": \"red, itchy eye\",\n  \"diagnosis\": \"allergic conjunctivitis\",\n  \"medications\": [\"ketotifen eye drops\"]\n}"
-}

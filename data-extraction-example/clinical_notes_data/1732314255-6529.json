@@ -1,4 +1,0 @@
-{
-    "prompt": "Lucy Carter (MRN: 223456), a 24-year-old female, presented on August 1, 2023, with complaints of anxiety that has been interfering with her daily life. She was diagnosed with generalized anxiety disorder (GAD) and prescribed sertraline. She was also referred to a counselor for therapy.",
-    "response": "{\n  \"mrn\": \"223456\",\n  \"patient_name\": \"Lucy Carter\",\n  \"age\": 24,\n  \"sex\": \"female\",\n  \"visit_date\": \"August 1, 2023\",\n  \"reason_for_visit\": \"complaints of anxiety that has been interfering with her daily life\",\n  \"diagnosis\": \"generalized anxiety disorder (GAD)\",\n  \"medications\": [\"sertraline\"]\n}"
-}

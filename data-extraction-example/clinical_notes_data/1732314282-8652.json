@@ -1,4 +1,0 @@
-{
-    "prompt": "Oliver Scott (MRN: 234890), a 53-year-old male, was seen on 03/05/2023 for chest discomfort and mild breathlessness. ECG and labs were normal. Diagnosis: gastroesophageal reflux disease (GERD). Omeprazole was prescribed, and dietary adjustments were recommended.",
-    "response": "{\n  \"mrn\": \"234890\",\n  \"patient_name\": \"Oliver Scott\",\n  \"age\": 53,\n  \"sex\": \"male\",\n  \"visit_date\": \"03/05/2023\",\n  \"reason_for_visit\": \"chest discomfort and mild breathlessness\",\n  \"diagnosis\": \"gastroesophageal reflux disease (GERD)\",\n  \"medications\": [\"Omeprazole\"]\n}"
-}

@@ -1,4 +1,0 @@
-{
-    "prompt": "Mia Carter (MRN: 210987), a 40-year-old female, was seen on 07/23/2023 for frequent headaches and difficulty concentrating. MRI ruled out structural causes. Diagnosis: tension headaches. She was prescribed amitriptyline and advised on stress management techniques.",
-    "response": "{\n  \"mrn\": \"210987\",\n  \"patient_name\": \"Mia Carter\",\n  \"age\": 40,\n  \"sex\": \"female\",\n  \"visit_date\": \"07/23/2023\",\n  \"reason_for_visit\": \"frequent headaches and difficulty concentrating\",\n  \"diagnosis\": \"tension headaches\",\n  \"medications\": [\"amitriptyline\"]\n}"
-}

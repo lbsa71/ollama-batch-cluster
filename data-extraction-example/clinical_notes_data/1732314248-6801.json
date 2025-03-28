@@ -1,4 +1,0 @@
-{
-    "prompt": "Mark Johnson (MRN: 345678), male, age 50, came to the hospital on 02/02/2023 reporting shortness of breath and a persistent cough. Examination revealed signs consistent with COPD. Pulmonary function tests were ordered to confirm the diagnosis, and he was started on bronchodilators for symptom relief.",
-    "response": "{\n  \"mrn\": \"345678\",\n  \"patient_name\": \"Mark Johnson\",\n  \"age\": 50,\n  \"sex\": \"male\",\n  \"visit_date\": \"02/02/2023\",\n  \"reason_for_visit\": \"shortness of breath and a persistent cough\",\n  \"diagnosis\": \"signs consistent with COPD\",\n  \"medications\": [\"bronchodilators\"]\n}"
-}
