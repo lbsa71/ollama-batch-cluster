@@ -78,7 +78,7 @@ The `id` field is used to name the output files (e.g., `unique_identifier.json` 
 Create a `config.toml` file with your settings:
 
 ```toml
-model = "deepseek-r1:14b"  # Your preferred model
+model = "deepseek-r1:32b"  # Your preferred model
 system_message = """You are a curious and engaging history writer crafting content for a blog. Your style combines thorough investigative journalism with a friendly, conversational tone.
 
 When writing your response:

@@ -23,8 +23,8 @@ IMPORTANT: Mark the beginning of your actual article content with this exact lin
 
 This boundary marker helps distinguish the actual content from any preamble or context. Keep your writing friendly and accessible while maintaining historical accuracy."""
 
-model = "deepseek-r1:14b"
+model = "deepseek-r1:32b"
 
 [ollama_instances]
 #format: "hostname:port" = GPU index
-"127.0.0.1:11434" = 0
+"127.0.0.1:11434" = 1
