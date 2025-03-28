@@ -128,7 +128,16 @@ async def fetch_all_contexts(urls: List[str]) -> List[str]:
     """Fetch content from all URLs concurrently."""
     async with aiohttp.ClientSession() as session:
         tasks = [fetch_url_content(url) for url in urls]
-        return await asyncio.gather(*tasks)
+        results = await asyncio.gather(*tasks)
+        
+        # Check if any fetch failed (returned empty string)
+        if any(content == "" for content in results):
+            failed_urls = [url for url, content in zip(urls, results) if content == ""]
+            error_message = f"Failed to fetch content from URLs: {', '.join(failed_urls)}"
+            log_message(error_message)
+            raise ValueError(error_message)
+            
+        return results
 
 def create_context_block(contents: List[str] = None, links: List[Tuple[str, str]] = None) -> str:
     """Create a formatted context block from fetched contents."""
@@ -340,12 +349,28 @@ async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
                 if links:
                     log_message(f"Found {len(links)} URLs in prompt {prompt_id}")
                     url_list = [url for _, url in links]
-                    contexts = await fetch_all_contexts(url_list)
-                    if any(contexts):
-                        log_message(f"Successfully fetched content from at least one URL")
+                    
+                    # Log the URLs being fetched
+                    for i, url in enumerate(url_list, 1):
+                        log_message(f"URL {i}: {url}")
+                    
+                    try:
+                        contexts = await fetch_all_contexts(url_list)
+                        
+                        # Create context block with the fetched content
+                        log_message(f"Successfully fetched content from all URLs")
+                        for i, context in enumerate(contexts, 1):
+                            log_message(f"Content from URL {i}: {len(context)} characters")
+                            
                         context_block = create_context_block(contexts, links)
-                    else:
-                        log_message(f"Failed to fetch content from any URLs")
+                    except ValueError as e:
+                        log_message(f"Error processing prompt {prompt_id}: {str(e)}")
+                        log_message(f"Skipping prompt {prompt_id} due to URL fetch failure")
+                        skipped += 1
+                        task_queue.task_done()
+                        continue
+                else:
+                    log_message(f"No URLs found in prompt {prompt_id}")
                 
                 # Process the prompt - use modified prompt with reference numbers
                 response_text, start_time, duration, length, full_prompt = await chat(modified_prompt, host, model, system_msg, context_block)
@@ -422,21 +447,20 @@ async def process_prompt_with_context(prompt, host, model, system_message, promp
         # Log the URLs being fetched
         for i, url in enumerate(url_list, 1):
             log_message(f"URL {i}: {url}")
-            
-        contexts = await fetch_all_contexts(url_list)
         
-        # Create context block with the fetched content if any was successfully retrieved
-        if any(contexts):
-            log_message(f"Successfully fetched context from at least one URL")
-            for i, context in enumerate(contexts, 1):
-                if context:
-                    log_message(f"Content from URL {i}: {len(context)} characters")
-                else:
-                    log_message(f"No content fetched from URL {i}")
+        try:
+            contexts = await fetch_all_contexts(url_list)
             
+            # Create context block with the fetched content
+            log_message(f"Successfully fetched content from all URLs")
+            for i, context in enumerate(contexts, 1):
+                log_message(f"Content from URL {i}: {len(context)} characters")
+                
             context_block = create_context_block(contexts, links)
-        else:
-            log_message(f"Failed to fetch any context from URLs")
+        except ValueError as e:
+            log_message(f"Error processing prompt {prompt_id}: {str(e)}")
+            log_message(f"Skipping prompt {prompt_id} due to URL fetch failure")
+            return None, None
     else:
         log_message(f"No URLs found in prompt {prompt_id}")
     
