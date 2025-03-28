@@ -115,7 +115,7 @@ def save_response(prompt, response_text, output_dir, prompt_id=None):
         json_file.flush()
 
     # Write the TXT file with just the response
-    txt_path = output_dir / f"{base_filename}.txt"
+    txt_path = output_dir / f"{base_filename}.md"
     with open(txt_path, "w", encoding="utf-8") as txt_file:
         txt_file.write(response_text)
         txt_file.flush()
