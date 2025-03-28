@@ -4,6 +4,158 @@
 
 # Ollama Batch Cluster
 
+This project is a fork and enhancement of the original [Ollama Batch Cluster](https://github.com/robert-mcdermott/ollama-batch-cluster) by Robert McDermott. While maintaining the core functionality of batch processing LLM prompts across multiple Ollama servers, this version adds several improvements:
+
+- Enhanced markdown formatting support for better readability
+- Improved context handling with structured sections
+- Better error handling and logging
+- Support for URL-based context fetching
+- Cleaner output file naming based on prompt IDs
+
+## Overview
+
+This tool allows you to batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. It's particularly useful for:
+
+- Processing large datasets of prompts
+- Running parallel inference across multiple GPUs
+- Generating structured content with consistent formatting
+- Extracting and analyzing data from multiple sources
+
+## Features
+
+- **Distributed Processing**: Run prompts across multiple Ollama servers and GPUs
+- **Markdown Support**: Generate beautifully formatted content with headers, emojis, and emphasis
+- **Context Management**: Fetch and incorporate context from URLs
+- **Structured Output**: Save responses in both JSON and TXT formats
+- **Clean File Naming**: Use prompt IDs for organized output files
+- **Progress Tracking**: Monitor processing status and performance metrics
+
+## Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/ollama-batch-cluster.git
+cd ollama-batch-cluster
+```
+
+2. Install the required dependencies:
+```bash
+pip install ollama toml
+```
+
+## Input Format
+
+The script accepts prompts in two formats:
+
+1. **JSONL File** (single file with multiple prompts):
+```json
+{"role": "user", "content": "Your prompt here"}
+{"role": "user", "content": "Another prompt"}
+```
+
+2. **JSON Folder** (directory of individual JSON files):
+```
+prompts/
+├── 1.json
+├── 2.json
+├── 3.json
+└── ...
+```
+
+Each JSON file in the folder should follow this format:
+```json
+{
+    "id": "unique_identifier",
+    "prompt": "Your prompt text here",
+    "urls": ["optional", "urls", "for", "context"]
+}
+```
+
+The `id` field is used to name the output files (e.g., `unique_identifier.json` and `unique_identifier.txt`). If no `id` is provided, a timestamp-based name will be used.
+
+## Configuration
+
+Create a `config.toml` file with your settings:
+
+```toml
+model = "deepseek-r1:14b"  # Your preferred model
+system_message = """You are a curious and engaging history writer crafting content for a blog. Your style combines thorough investigative journalism with a friendly, conversational tone.
+
+When writing your response:
+1. First, analyze the provided context and think through your approach using <think> tags
+2. Then, write your article in a casual, engaging style that avoids academic stiffness
+3. Use specific examples and analogies to make complex ideas relatable
+4. Maintain a conversational flow while being thorough and accurate
+5. Include relevant historical details and modern parallels
+6. End with thought-provoking questions to engage readers
+
+Format your response in Markdown:
+- Use # for main title, ## for subtitles, and ### for section headers
+- Add relevant emojis to headers and key points
+- Use **bold** for emphasis and *italic* for subtle emphasis
+- Create bullet points with - or numbered lists with 1.
+- Use > for important quotes or callouts
+- Add --- for section breaks when needed"""
+
+[ollama_instances]
+#format: "hostname:port" = GPU index
+"127.0.0.1:11434" = 0
+```
+
+## Usage
+
+1. Prepare your prompts in either JSONL format or as individual JSON files in a folder.
+
+2. Run the batch processor:
+```bash
+# Using JSONL file
+python ollama-batch-process.py --prompts prompts.jsonl --config config.toml --output_dir responses
+
+# Using JSON folder
+python ollama-batch-process.py --prompts prompts/ --config config.toml --output_dir responses
+```
+
+3. Check the output in the `responses` directory:
+- JSON files containing the full prompt/response data
+- TXT files with the formatted markdown content
+
+## Output Format
+
+The script generates two types of output files for each prompt:
+
+1. **JSON Files** (`prompt_id.json`):
+```json
+{
+    "prompt": "Original prompt text",
+    "response": "Generated response",
+    "think": "Model's thinking process"
+}
+```
+
+2. **Markdown Files** (`prompt_id.txt`):
+```markdown
+# Main Title
+## Subtitle
+
+### Section Header
+Content with **emphasis** and *style*
+
+- Bullet points
+- More points
+
+> Important quote or callout
+```
+
+## Acknowledgments
+
+This project is based on the original work by Robert McDermott ([@robert-mcdermott](https://github.com/robert-mcdermott)) in his [Ollama Batch Cluster](https://github.com/robert-mcdermott/ollama-batch-cluster) repository. The original project demonstrated how to effectively utilize multiple GPUs with Ollama for batch processing, and this fork builds upon that foundation to add enhanced formatting and context handling capabilities.
+
+## License
+
+This project is licensed under the same terms as the original repository. Please refer to the original repository for the complete license information.
+
+# Ollama Batch Cluster
+
 The code in this repository will allow you to batch process a large number of LLM prompts across one or more Ollama servers concurrently and centrally collect all the responses. 
 
 This project started after I tried to get Ollama to make full use of a system with four Nvidia L40S GPUs but failed. I adjusted the *OLLAMA_NUM_PARALLEL* and *OLLAMA_SCHED_SPREAD* environment variables, and while it was now using all four GPUs, it was only pushing each GPU to about 25% utilization, so it didn't run any faster than if I had only had one GPU. I then ran four independent Ollama servers, each one pinned to different GPU using the *CUDA_VISIBLE_DEVICES* variable, and created a script to load balance prompts across the Ollama servers and GPUs. After a bunch of testing and refinement I ended up with the system I've shared in this repo. For a larger test, I spun up Ollama servers on six more servers, each with 4 L40S GPUs for a total of 28 GPUs and 1.344TB of VRAM. It worked perfectly. I know that vLLM is probably a better option for performance than Ollama, but I really like Ollama and it makes this very simple. I'll be spending more time with vLLM soon. I as able to use this setup to keep all 28 GPUs over 90% utilized for over 24 hours to stress test new GPUs before they went into production (one GPU kept failing with double bit errors and needed to be replaced).
@@ -40,7 +192,7 @@ Next, you'll need to create a *JSONL* formatted file, with a single prompt per l
 {"role": "user", "content": "How did the Roman Empire maintain control over such a vast territory?"}
 {"role": "user", "content": "Examine the relationship between the Roman Senate and the Emperor."}
 {"role": "user", "content": "What technological innovations did the Romans contribute to modern society?"}
-{"role": "user", "content": "Analyze the role of the Roman economy in sustaining the empire’s growth and stability."}
+{"role": "user", "content": "Analyze the role of the Roman economy in sustaining the empire's growth and stability."}
 {"role": "user", "content": "Describe the causes and consequences of the Roman Empire's split into Eastern and Western regions."}
 ```
 
