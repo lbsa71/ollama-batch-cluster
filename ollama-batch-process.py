@@ -17,10 +17,34 @@ import aiohttp
 from typing import List, Tuple, Dict
 import traceback
 
+def safe_print(message):
+    """Safely print messages, handling encoding issues that may occur with emojis."""
+    try:
+        print(message, flush=True)
+    except UnicodeEncodeError:
+        # Replace emojis with their descriptions or simpler characters
+        emoji_replacements = {
+            '📅': '[DATE]',
+            '🌍': '[GLOBE]',
+            '📚': '[BOOK]',
+            '✍️': '[WRITING]',
+            '📢': '[ANNOUNCE]',
+            '🤔': '[THINKING]',
+            '💡': '[IDEA]',
+            '🧠': '[BRAIN]',
+            '🔍': '[SEARCH]',
+            '🤯': '[MIND-BLOWN]',
+            '🚀': '[ROCKET]',
+            '🌠': '[STAR]',
+        }
+        for emoji, replacement in emoji_replacements.items():
+            message = message.replace(emoji, replacement)
+        print(message, flush=True)
+
 def log_message(message):
     """Prints a message with a timestamp."""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"{timestamp}, {message}", flush=True)
+    safe_print(f"{timestamp}, {message}")
 
 # Import platform-specific notification modules
 WINDOWS_NOTIFICATION_AVAILABLE = False
@@ -36,10 +60,10 @@ if platform.system() == "Windows":
 def show_notification(title, message):
     """Show a system notification if available for the platform."""
     # Print a prominent message in the console
-    print("\n" + "=" * 80)
-    print(f"📢 {title}")
-    print(f"   {message}")
-    print("=" * 80 + "\n")
+    safe_print("\n" + "=" * 80)
+    safe_print(f"[ANNOUNCE] {title}")
+    safe_print(f"   {message}")
+    safe_print("=" * 80 + "\n")
     
     # Try to play a sound on Windows
     if platform.system() == "Windows" and WINDOWS_NOTIFICATION_AVAILABLE:
@@ -60,20 +84,33 @@ def show_notification(title, message):
 
 async def fetch_url_content(url: str) -> str:
     """Fetch and clean content from a URL using trafilatura."""
+    log_message(f"Attempting to fetch content from URL: {url}")
     try:
         downloaded = trafilatura.fetch_url(url)
         if downloaded:
+            log_message(f"Successfully downloaded content from {url}")
             text = trafilatura.extract(downloaded)
             if text:
+                log_message(f"Successfully extracted text from {url} ({len(text)} characters)")
                 return text.strip()
+            else:
+                log_message(f"Failed to extract text from {url}")
+        else:
+            log_message(f"Failed to download content from {url}")
     except Exception as e:
         log_message(f"Error fetching {url}: {e}")
+        traceback.print_exc()
     return ""
 
 def extract_markdown_links(text: str) -> List[Tuple[str, str]]:
     """Extract markdown links from text."""
     pattern = r'\[([^\]]+)\]\(([^)]+)\)'
-    return re.findall(pattern, text)
+    links = re.findall(pattern, text)
+    if links:
+        log_message(f"Found {len(links)} markdown links in text: {links}")
+    else:
+        log_message(f"No markdown links found in text: {text[:100]}...")
+    return links
 
 def process_prompt_with_context(prompt: str) -> Tuple[str, List[str]]:
     """Process a prompt, extracting links and preparing context."""
@@ -93,34 +130,42 @@ async def fetch_all_contexts(urls: List[str]) -> List[str]:
         tasks = [fetch_url_content(url) for url in urls]
         return await asyncio.gather(*tasks)
 
-def create_context_block(contents: List[str]) -> str:
+def create_context_block(contents: List[str] = None, links: List[Tuple[str, str]] = None) -> str:
     """Create a formatted context block from fetched contents."""
-    if not contents:
-        return ""
-    
     # Get current date in unambiguous format
     current_date = datetime.now().strftime("%B %d, %Y")
     
     context_block = "# Context Information\n\n"
-    context_block += f"📅 Current date: {current_date}\n\n"
+    context_block += f"Today is {current_date} - treat this as a fact, not a hypothetical. Keep this in mind when you refer to years and dates, future and past!\n\n"
+    context_block += "You are based in Sweden and should consider Nordic and European perspectives in your responses. Approach topics from this cultural viewpoint when relevant.\n\n"
     
-    # Add a section for contextual knowledge
-    context_block += "## 📚 Contextual Knowledge\n"
-    context_block += "Below are the relevant context sections that will inform the article:\n\n"
-    
-    for i, content in enumerate(contents, 1):
-        if content:
-            context_block += f"### Context Section {i}\n"
-            context_block += f"{content[:500]}...\n\n"
+    # Add URL content sections if available
+    if contents and any(contents) and links:
+        # Add a section for reference materials
+        context_block += "## References\n"
+        
+        for i, (content, (link_text, url)) in enumerate(zip(contents, links), 1):
+            if content:
+                # Clean up the content by removing excessive whitespace
+                cleaned_content = re.sub(r'\n\s*\n', '\n\n', content)
+                # Truncate to a reasonable length but include enough for context
+                max_chars = 1500  # Adjust this value as needed
+                if len(cleaned_content) > max_chars:
+                    truncated_content = cleaned_content[:max_chars] + "...\n\n(content truncated for brevity)"
+                else:
+                    truncated_content = cleaned_content
+                    
+                context_block += f"Reference [{i}]: {url}\n{truncated_content}\n\n"
     
     # Add a section for writing instructions
-    context_block += "## ✍️ Writing Instructions\n"
-    context_block += "Please use the above context to inform your article. "
-    context_block += "Remember to maintain a friendly, engaging tone while being thorough and accurate.\n\n"
+    context_block += "## Writing Instructions\n"
+    context_block += "Please use the above context and references to inform your article. "
+    context_block += "Remember to maintain a friendly, engaging tone while being thorough and accurate. "
+    context_block += "Synthesize the information from references into your own words rather than copying directly.\n\n"
     
     return context_block
 
-def save_response(prompt, response_text, output_dir, prompt_id=None, start_time=None, duration=None, length=None):
+def save_response(prompt, response_text, output_dir, prompt_id=None, start_time=None, duration=None, length=None, full_prompt=None):
     """Saves the response to JSON and TXT files with a unique filename based on prompt ID."""
     # Use prompt_id as filename, or fallback to a timestamp if no ID provided
     if prompt_id:
@@ -153,6 +198,7 @@ def save_response(prompt, response_text, output_dir, prompt_id=None, start_time=
     # Create the output dictionary with timing and length metrics
     output = {
         "prompt": prompt,
+        "full_prompt": full_prompt if full_prompt else prompt,  # Include full prompt if available
         "response": response_text,
         "think": think_content,
         "metrics": {
@@ -219,13 +265,27 @@ async def chat(prompt, host, model, system_message, context_block=None):
     """Process a single prompt with context and return the response."""
     start_time = datetime.now()
     
+    # Create context block with date and location if none was provided
+    if context_block is None:
+        context_block = create_context_block()
+    
     # Prepare messages with context if available
     messages = []
     if system_message:
         messages.append({"role": "system", "content": system_message})
-    if context_block:
-        messages.append({"role": "user", "content": context_block})
+    
+    # Always include context block
+    messages.append({"role": "user", "content": context_block})
     messages.append({"role": "user", "content": prompt})
+
+    # Create the full prompt for debugging
+    full_prompt = ""
+    if system_message:
+        full_prompt += f"System: {system_message}\n\n"
+    
+    # Always include context block in full prompt
+    full_prompt += f"Context: {context_block}\n\n"
+    full_prompt += f"User: {prompt}"
 
     # Make the API request
     client = AsyncClient(host=host)
@@ -239,7 +299,7 @@ async def chat(prompt, host, model, system_message, context_block=None):
     duration = (datetime.now() - start_time).total_seconds()
     length = len(response['message']['content'])
     
-    return response['message']['content'], start_time, duration, length
+    return response['message']['content'], start_time, duration, length, full_prompt
 
 async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
     """Process prompts from the queue using the specified host and GPU."""
@@ -265,8 +325,30 @@ async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
             
             start_time = datetime.now()
             try:
-                # Process the prompt
-                response_text, start_time, duration, length = await chat(prompt, host, model, system_msg)
+                # Extract URLs from prompt text
+                links = extract_markdown_links(prompt)
+                
+                # Create a modified prompt with reference numbers instead of markdown links
+                modified_prompt = prompt
+                for i, (text, url) in enumerate(links, 1):
+                    modified_prompt = modified_prompt.replace(f'[{text}]({url})', f'{text}[{i}]')
+                
+                # Create the context block (always includes date/time and location)
+                context_block = create_context_block()
+                
+                # If we have URLs, fetch their content and create an enhanced context block
+                if links:
+                    log_message(f"Found {len(links)} URLs in prompt {prompt_id}")
+                    url_list = [url for _, url in links]
+                    contexts = await fetch_all_contexts(url_list)
+                    if any(contexts):
+                        log_message(f"Successfully fetched content from at least one URL")
+                        context_block = create_context_block(contexts, links)
+                    else:
+                        log_message(f"Failed to fetch content from any URLs")
+                
+                # Process the prompt - use modified prompt with reference numbers
+                response_text, start_time, duration, length, full_prompt = await chat(modified_prompt, host, model, system_msg, context_block)
                 processed += 1
                 
                 # Calculate words in response
@@ -274,13 +356,14 @@ async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
                 
                 # Save response with timing information
                 json_path, txt_path = save_response(
-                    prompt, 
+                    prompt,  # Save original prompt in output
                     response_text, 
                     output_dir, 
                     prompt_id,
                     start_time,
                     duration,
-                    length
+                    length,
+                    full_prompt
                 )
                 
                 # Log completion with metrics
@@ -293,6 +376,7 @@ async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
                 
             except Exception as e:
                 log_message(f"Error on host {host}: {str(e)}")
+                traceback.print_exc()
                 
             # Mark task as done
             task_queue.task_done()
@@ -301,6 +385,7 @@ async def worker(host, gpu_index, model, task_queue, output_dir, stats=None):
             break
         except Exception as e:
             log_message(f"Worker error: {str(e)}")
+            traceback.print_exc()
     
     # Update stats dictionary if provided
     if stats is not None:
@@ -319,28 +404,55 @@ async def process_prompt_with_context(prompt, host, model, system_message, promp
             return None, None
     
     # Extract URLs from prompt if present
-    urls = extract_markdown_links(prompt)
+    links = extract_markdown_links(prompt)
     
-    # Fetch context if URLs are present
-    context_block = None
-    if urls:
-        url_list = [url for _, url in urls]
+    # Create a modified prompt with reference numbers instead of markdown links
+    modified_prompt = prompt
+    for i, (text, url) in enumerate(links, 1):
+        modified_prompt = modified_prompt.replace(f'[{text}]({url})', f'{text}[{i}]')
+    
+    # Always create a context block with date and location
+    context_block = create_context_block()
+    
+    # Fetch additional context if URLs are present
+    if links:
+        log_message(f"Found {len(links)} URLs in prompt {prompt_id}: {links}")
+        url_list = [url for _, url in links]
+        
+        # Log the URLs being fetched
+        for i, url in enumerate(url_list, 1):
+            log_message(f"URL {i}: {url}")
+            
         contexts = await fetch_all_contexts(url_list)
+        
+        # Create context block with the fetched content if any was successfully retrieved
         if any(contexts):
-            context_block = create_context_block(contexts)
+            log_message(f"Successfully fetched context from at least one URL")
+            for i, context in enumerate(contexts, 1):
+                if context:
+                    log_message(f"Content from URL {i}: {len(context)} characters")
+                else:
+                    log_message(f"No content fetched from URL {i}")
+            
+            context_block = create_context_block(contexts, links)
+        else:
+            log_message(f"Failed to fetch any context from URLs")
+    else:
+        log_message(f"No URLs found in prompt {prompt_id}")
     
-    # Get response from model
-    response_text, start_time, duration, length = await chat(prompt, host, model, system_message, context_block)
+    # Get response from model - use modified_prompt with reference numbers
+    response_text, start_time, duration, length, full_prompt = await chat(modified_prompt, host, model, system_message, context_block)
     
     # Save response with timing information
     return save_response(
-        prompt, 
+        prompt,  # Save original prompt in output
         response_text, 
         output_dir, 
         prompt_id, 
         start_time, 
         duration, 
-        length
+        length,
+        full_prompt
     )
 
 async def main(config_path, prompts_path, output_dir, no_notify=False):
