@@ -34,3 +34,5 @@ typing-extensions==4.12.2
     # via
     #   pydantic
     #   pydantic-core
+trafilatura==1.6.4
+    # via ollama-batch-cluster (pyproject.toml)
